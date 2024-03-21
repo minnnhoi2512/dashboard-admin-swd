@@ -19,6 +19,7 @@ function CanceledOrder() {
       <Typography.Title level={4}>Canceled</Typography.Title>
       <div className="flex justify-center ">
         <Table
+          style={{ width: 1200 }}
           loading={loading}
           columns={[
             {

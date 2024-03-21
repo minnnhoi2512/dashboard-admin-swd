@@ -19,6 +19,7 @@ function Wallet() {
       <Typography.Title level={4}>Wallet</Typography.Title>
       <div className="flex justify-center ">
         <Table
+          style={{ width: 1200 }}
           loading={loading}
           columns={[
             {

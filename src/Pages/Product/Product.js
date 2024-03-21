@@ -19,6 +19,7 @@ function Product() {
       <Typography.Title level={4}>Product In Store</Typography.Title>
       <div className="flex justify-center ">
         <Table
+          style={{ width: 1200 }}
           loading={loading}
           columns={[
             {

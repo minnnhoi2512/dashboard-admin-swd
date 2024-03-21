@@ -19,6 +19,7 @@ function StoreDetail() {
       <Typography.Title level={4}>Store</Typography.Title>
       <div className="flex justify-center ">
         <Table
+          style={{ width: 1200 }}
           loading={loading}
           columns={[
             {

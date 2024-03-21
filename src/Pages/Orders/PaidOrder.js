@@ -1,32 +1,33 @@
 import { Avatar, Rate, Space, Table, Typography } from "antd";
 import { useEffect, useState } from "react";
 import { getPaidOrders, getShippers } from "../../API";
-import moment from 'moment';
+import moment from "moment";
 function PaidOrder() {
   const [loading, setLoading] = useState(false);
-  const [loadingShipper, setLoadingShipper] = useState(false);
-  const [dataSource, setDataSource] = useState([]);
-  const [shippers, setListShipper] = useState([]);
-  useEffect(() => {
-    setLoading(true);
-    getPaidOrders().then((res) => {
-      setDataSource(res);
-      setLoading(false);
-    });
-    getShippers().then((res) => {
-      setDataSource(res);
-      setLoadingShipper(false);
-    });
-  }, []);
+  // const [loadingShipper, setLoadingShipper] = useState(false);
+  // const [dataSource, setDataSource] = useState([]);
+  // const [shippers, setListShipper] = useState([]);
+  // useEffect(() => {
+  //   setLoading(true);
+  //   getPaidOrders().then((res) => {
+  //     setDataSource(res);
+  //     setLoading(false);
+  //   });
+  //   getShippers().then((res) => {
+  //     setDataSource(res);
+  //     setLoadingShipper(false);
+  //   });
+  // }, []);
   const handleChooseShipper = (CustomerOrderId) => {
     console.log(CustomerOrderId);
-  }
+  };
   /// note : cái dataIndex : để fetch data , nên
   return (
     <Space size={20} direction="vertical" className="items-center  ">
       <Typography.Title level={4}>PaidOrder</Typography.Title>
       <div className="flex justify-center ">
         <Table
+          style={{ width: 1200 }}
           loading={loading}
           columns={[
             {
@@ -49,7 +50,9 @@ function PaidOrder() {
               title: "Date",
               dataIndex: "OrderDate",
               render: (OrderDate) => {
-                const formattedDate = moment(OrderDate).format('YYYY-MM-DD HH:mm:ss');
+                const formattedDate = moment(OrderDate).format(
+                  "YYYY-MM-DD HH:mm:ss"
+                );
                 return <span>{formattedDate}</span>;
               },
             },
@@ -70,7 +73,7 @@ function PaidOrder() {
                   text = "NOT YET";
                 }
                 return <span>{text}</span>;
-              }
+              },
             },
             {
               title: "Action",
@@ -78,13 +81,17 @@ function PaidOrder() {
               render: (CustomerOrderId) => {
                 return (
                   <span>
-                    <button onClick={() => handleChooseShipper(CustomerOrderId)}>Choose Shipper</button>
+                    <button
+                      onClick={() => handleChooseShipper(CustomerOrderId)}
+                    >
+                      Choose Shipper
+                    </button>
                   </span>
                 );
               },
             },
           ]}
-          dataSource={dataSource}
+          // dataSource={dataSource}
           pagination={{
             pageSize: 5,
           }}

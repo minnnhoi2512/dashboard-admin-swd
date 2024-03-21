@@ -16,6 +16,7 @@ function App() {
       <NavHeader />
       <div className="SideMenuAndPageContent flex flex-1  ">
         <SideMenu></SideMenu>
+
         <div className="bg-gray-200 w-full flex justify-center items-center ">
           <PageContent />
         </div>

@@ -3,7 +3,7 @@ import AccountManager from "../../Pages/Customers/AccountManager";
 import Dashboard from "../../Pages/Dashboard/Dashboard";
 
 import Area from "../../Pages/Location/Area";
-import Building from "../../Pages/Location/Building";
+
 import Brand from "../../Pages/Product/Brand";
 import StoreDetail from "../../Pages/Product/Store/StoreDetail";
 import Product from "../../Pages/Product/Product";
@@ -20,7 +20,6 @@ function AppRoutes() {
       <Route path="/dashboard" element={<Dashboard />}></Route>
       <Route path="/area" element={<Area />}></Route>
 
-      <Route path="/building" element={<Building />}></Route>
       <Route path="/accounts" element={<AccountManager />}></Route>
       <Route path="/brand" element={<Brand />}></Route>
       <Route path="/store_detail" element={<StoreDetail />}></Route>

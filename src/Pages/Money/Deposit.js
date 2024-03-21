@@ -19,6 +19,7 @@ function Deposit() {
       <Typography.Title level={4}>Deposit</Typography.Title>
       <div className="flex justify-center ">
         <Table
+          style={{ width: 1200 }}
           loading={loading}
           columns={[
             {

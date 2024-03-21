@@ -1,201 +1,164 @@
 import React, { useState } from "react";
+import {
+  AppstoreOutlined,
+  ContainerOutlined,
+  DesktopOutlined,
+  FullscreenOutlined,
+  MailOutlined,
+  MenuFoldOutlined,
+  MenuUnfoldOutlined,
+  PieChartOutlined,
+} from "@ant-design/icons";
+import { Button, Menu } from "antd";
 import { Link } from "react-router-dom";
 
-const Menu = () => {
+function getItem(label, key, icon, children, type, path) {
+  return {
+    key,
+    icon,
+    children,
+    label,
+    type,
+    path,
+  };
+}
+
+const items = [
+  getItem(
+    "Dashboard",
+    "dashboard",
+    <PieChartOutlined />,
+    null,
+    "link",
+    "/dashboard"
+  ),
+  getItem("Account Manager", "accountManagement", <ContainerOutlined />, [
+    getItem("Account", "account", null, null, "link", "/accounts"),
+  ]),
+  getItem("Location", "location", <DesktopOutlined />, [
+    getItem("Area", "area", null, null, "link", "/area"),
+  ]),
+  getItem("Product", "product", <AppstoreOutlined />, [
+    getItem("Brand", "brand", null, null, "link", "/brand"),
+    getItem(
+      "Store",
+      "store",
+      null,
+      [
+        getItem(
+          "StoreDetail",
+          "storeDetail",
+          null,
+          null,
+          "link",
+          "/store_detail"
+        ),
+        getItem(
+          "Product in Store",
+          "productInStore",
+          null,
+          null,
+          "link",
+          "/wallet"
+        ),
+      ],
+      "subMenu"
+    ),
+    getItem("Product", "product", null, null, "link", "/product"),
+  ]),
+  getItem("Order", "order", <MailOutlined />, [
+    getItem(
+      "Pending Order",
+      "pendingOrder",
+      null,
+      null,
+      "link",
+      "/pending_order"
+    ),
+    getItem("Paid Order", "paidOrder", null, null, "link", "/paid_order"),
+    getItem(
+      "Canceled Order",
+      "canceledOrder",
+      null,
+      null,
+      "link",
+      "/canceled_order"
+    ),
+  ]),
+  getItem("Money", "money", <PieChartOutlined />, [
+    getItem("Deposit", "deposit", null, null, "link", "/deposit"),
+    getItem("Transaction", "transaction", null, null, "link", "/transaction"),
+    getItem("Wallet", "wallet", null, null, "link", "/wallet"),
+  ]),
+];
+
+const SideMenu = () => {
+  const [collapsed, setCollapsed] = useState(false);
   const [isDropdownOpen, setIsDropdownOpen] = useState({
-    account: false,
+    accountManagement: false,
     location: false,
     product: false,
     order: false,
     money: false,
-    store: false,
   });
 
-  const toggleDropdown = (section) => {
+  const toggleCollapsed = () => {
+    setCollapsed(!collapsed);
+  };
+
+  const handleDropdownClick = (key) => {
     setIsDropdownOpen((prevState) => ({
       ...prevState,
-      [section]: !prevState[section],
+      [key]: !prevState[key],
     }));
   };
 
   return (
-    <div className="p-8 bg-white h-full w-[306px] ">
-      <Link to="/dashboard">
-        <h1 className="text-lg font-semibold mb-4 ml-8">Dashboard</h1>
-      </Link>
-
-      <div className="space-y-4">
-        {/* Account Manager */}
-        <div
-          className={`bg-gray-200 p-4 rounded shadow ${
-            isDropdownOpen.account ? "bg-blue-300" : ""
-          }`}
-        >
-          <h2
-            className={`text-lg font-semibold cursor-pointer ${
-              isDropdownOpen.account ? "mb-2 text-white" : ""
-            }`}
-            onClick={() => toggleDropdown("account")}
-          >
-            Account Manager
-          </h2>
-          {isDropdownOpen.account && (
-            <ul className="ml-4">
-              <Link to="/accounts" className="text-blue-700">
-                Account
-              </Link>
-            </ul>
-          )}
-        </div>
-
-        {/* Location */}
-        <div
-          className={`bg-gray-200  p-4 rounded shadow ${
-            isDropdownOpen.location ? "bg-blue-300" : ""
-          }`}
-        >
-          <h2
-            className={`text-lg font-semibold cursor-pointer ${
-              isDropdownOpen.location ? "mb-2 text-white" : ""
-            }`}
-            onClick={() => toggleDropdown("location")}
-          >
-            Location
-          </h2>
-          {isDropdownOpen.location && (
-            <div>
-              <div>
-                <Link to="/area" className="text-blue-700">
-                  Area
-                </Link>
-              </div>
-              <div>
-                <Link to="/building" className="text-blue-700">
-                  Building
-                </Link>
-              </div>
-            </div>
-          )}
-        </div>
-
-        {/* Product */}
-        <div
-          className={`bg-gray-200  p-4 rounded shadow ${
-            isDropdownOpen.product ? "bg-blue-300" : ""
-          }`}
-        >
-          <h2
-            className={`text-lg font-semibold cursor-pointer ${
-              isDropdownOpen.product ? "mb-2 text-white" : ""
-            }`}
-            onClick={() => toggleDropdown("product")}
-          >
-            Product
-          </h2>
-          {isDropdownOpen.product && (
-            <ul className="ml-4">
-              <li>
-                <Link to="/brand" className="text-blue-700">
-                  Brand
-                </Link>
-              </li>
-              <li>
-                <div
-                  className={`  cursor-pointer text-blue-700 ${
-                    isDropdownOpen.store ? "mb-2 text-red-700" : ""
-                  }`}
-                  onClick={() => toggleDropdown("store")}
-                >
-                  Store
-                </div>
-                {isDropdownOpen.store && (
-                  <ul className="ml-4">
-
-                  </ul>
-                )}
-              </li>
-
-              <li>
-                <Link to="/product" className="text-blue-700">
-                  Product
-                </Link>
-              </li>
-            </ul>
-          )}
-        </div>
-
-        {/* Order */}
-        <div
-          className={`bg-gray-200  p-4 rounded shadow ${
-            isDropdownOpen.order ? "bg-blue-300" : ""
-          }`}
-        >
-          <h2
-            className={`text-lg font-semibold cursor-pointer ${
-              isDropdownOpen.order ? "mb-2 text-white" : ""
-            }`}
-            onClick={() => toggleDropdown("order")}
-          >
-            Order
-          </h2>
-          {isDropdownOpen.order && (
-            <ul className="ml-4">
-              <li>
-                <Link to="/pending_order" className="text-blue-700">
-                  Pending Order
-                </Link>
-              </li>
-              <li>
-                <Link to="/paid_order" className="text-blue-700">
-                  Paid Order
-                </Link>
-              </li>
-              <li>
-                <Link to="/canceled_order" className="text-blue-700">
-                  Canceled Order
-                </Link>
-              </li>
-            </ul>
-          )}
-        </div>
-
-        {/* Money */}
-        <div
-          className={`bg-gray-200  p-4 rounded shadow ${
-            isDropdownOpen.money ? "bg-blue-300" : ""
-          }`}
-        >
-          <h2
-            className={`text-lg font-semibold cursor-pointer ${
-              isDropdownOpen.money ? "mb-2  text-white" : ""
-            }`}
-            onClick={() => toggleDropdown("money")}
-          >
-            Money
-          </h2>
-          {isDropdownOpen.money && (
-            <ul className="ml-4">
-              <li>
-                <Link to="/deposit" className="text-blue-700">
-                  Deposit
-                </Link>
-              </li>
-              <li>
-                <Link to="/transaction" className="text-blue-700">
-                  Transaction
-                </Link>
-              </li>
-              <li>
-                <Link to="/wallet" className="text-blue-700">
-                  Wallet
-                </Link>
-              </li>
-            </ul>
-          )}
-        </div>
-      </div>
+    <div className="bg-black">
+      <Button
+        type="primary"
+        onClick={toggleCollapsed}
+        style={{ marginBottom: 16 }}
+      >
+        {collapsed ? <MenuUnfoldOutlined /> : <MenuFoldOutlined />}
+      </Button>
+      <Menu
+        defaultSelectedKeys={["dashboard"]}
+        defaultOpenKeys={["accountManagement"]}
+        mode="inline"
+        theme="dark"
+        inlineCollapsed={collapsed}
+      >
+        {items.map((item) => {
+          if (item.children) {
+            return (
+              <Menu.SubMenu
+                key={item.key}
+                icon={item.icon}
+                title={item.label}
+                onTitleClick={() => handleDropdownClick(item.key)}
+                open={isDropdownOpen[item.key]}
+              >
+                {item.children.map((child) => (
+                  <Menu.Item key={child.key}>
+                    <Link to={child.path}>{child.label}</Link>
+                  </Menu.Item>
+                ))}
+              </Menu.SubMenu>
+            );
+          } else if (item.type === "link") {
+            return (
+              <Menu.Item key={item.key} icon={item.icon}>
+                <Link to={item.path}>{item.label}</Link>
+              </Menu.Item>
+            );
+          } else {
+            return null;
+          }
+        })}
+      </Menu>
     </div>
   );
 };
 
-export default Menu;
+export default SideMenu;

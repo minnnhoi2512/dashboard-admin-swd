@@ -19,6 +19,7 @@ function Transaction() {
       <Typography.Title level={4}>Transaction</Typography.Title>
       <div className="flex justify-center ">
         <Table
+          style={{ width: 1200 }}
           loading={loading}
           columns={[
             {
