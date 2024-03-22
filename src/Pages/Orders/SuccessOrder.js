@@ -1,18 +1,19 @@
 import { Avatar, Rate, Space, Table, Typography } from "antd";
 import { useEffect, useState } from "react";
-import { getCanceledOrder } from "../../API";
+import { getSuccessOrder } from "../../API";
 import moment from "moment";
-function CanceledOrder() {
+function SuccessOrder() {
   const [loading, setLoading] = useState(false);
   const [dataSource, setDataSource] = useState([]);
 
   useEffect(() => {
     setLoading(true);
-    getCanceledOrder().then((res) => {
+    getSuccessOrder().then((res) => {
       setDataSource(res);
       setLoading(false);
     });
   }, []);
+
   const getStatusColor = (status) => {
     if (status === "Pending") {
       return "yellow";
@@ -24,10 +25,11 @@ function CanceledOrder() {
       return "";
     }
   };
+
   /// note : cái dataIndex : để fetch data , nên
   return (
     <Space size={20} direction="vertical" className="items-center  ">
-      <Typography.Title level={4}>Canceled</Typography.Title>
+      <Typography.Title level={4}>Thành Công</Typography.Title>
       <div className="flex justify-center ">
         <Table
           style={{ width: 1200 }}
@@ -70,10 +72,6 @@ function CanceledOrder() {
               title: "Mã tòa",
               dataIndex: "BuildingName",
             },
-            {
-              title: "To",
-              dataIndex: "BuildingName",
-            },
           ]}
           dataSource={dataSource}
           pagination={{
@@ -84,4 +82,4 @@ function CanceledOrder() {
     </Space>
   );
 }
-export default CanceledOrder;
+export default SuccessOrder;

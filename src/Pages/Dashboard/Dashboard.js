@@ -50,7 +50,7 @@ function Dashboard() {
   return (
     <Space size={20} direction="vertical">
       <Typography.Title level={4} className="mt-8 flex justify-center">
-        Dashboard
+        Bảng số liệu
       </Typography.Title>
       <Space direction="horizontal">
         <DashboardCard
@@ -65,7 +65,7 @@ function Dashboard() {
               }}
             />
           }
-          title={"Orders"}
+          title={"Đơn hàng"}
           value={orders}
         />
         <DashboardCard
@@ -80,7 +80,7 @@ function Dashboard() {
               }}
             />
           }
-          title={"Inventory"}
+          title={"Store"}
           value={inventory}
         />
         <DashboardCard
@@ -95,7 +95,7 @@ function Dashboard() {
               }}
             />
           }
-          title={"Customer"}
+          title={"Khách hàng"}
           value={customers}
         />
         <DashboardCard
@@ -110,7 +110,7 @@ function Dashboard() {
               }}
             />
           }
-          title={"Revenue"}
+          title={"Tổng"}
           value={revenue}
         />
       </Space>
@@ -146,19 +146,19 @@ function RecentOrders() {
 
   return (
     <>
-      <Typography.Text>Recent Orders</Typography.Text>
+      <Typography.Text>Các đơn hàng hiện tại</Typography.Text>
       <Table
         columns={[
           {
-            title: "Title",
+            title: "Mục",
             dataIndex: "title",
           },
           {
-            title: "Quantity",
+            title: "Số lương",
             dataIndex: "quantity",
           },
           {
-            title: "Price",
+            title: "Giá",
             dataIndex: "discountedPrice",
           },
         ]}
@@ -208,7 +208,7 @@ function DashboardChart() {
       },
       title: {
         display: true,
-        text: "Order Revenue",
+        text: "Tổng đơn hàng",
       },
     },
   };

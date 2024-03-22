@@ -23,22 +23,22 @@ function Transaction() {
           loading={loading}
           columns={[
             {
-              title: "No",
+              title: "ID",
               dataIndex: "TransactionId",
             },
             {
-              title: "Amount",
+              title: "Tổng",
               dataIndex: "Amount",
             },
 
             {
-              title: "Status",
+              title: "Trạng thái",
               dataIndex: "Status",
               render: (Status) => {
                 let text = "";
                 let textColorClass = "";
 
-                if (Status != 'T') {
+                if (Status != "T") {
                   text = "Trừ tiền";
                   textColorClass = "text-red-500"; // Chữ màu đỏ
                 } else {
@@ -47,10 +47,10 @@ function Transaction() {
                 }
 
                 return <span className={textColorClass}>{text}</span>;
-              }
+              },
             },
             {
-              title: "Date",
+              title: "Ngày",
               dataIndex: "Date",
               render: (Date) => {
                 const formattedDate = moment(Date).format(
@@ -60,7 +60,7 @@ function Transaction() {
               },
             },
             {
-              title: "Wallet of",
+              title: "Ví tiền",
               dataIndex: "Name_Customer",
             },
           ]}

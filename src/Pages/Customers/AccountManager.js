@@ -33,7 +33,7 @@ function AccountManager() {
   return (
     <Space size={20} direction="vertical">
       <Typography.Title level={4} className="text-center mt-5">
-        Account
+        Tài khoản
       </Typography.Title>
       <div className="flex justify-end mr-12">
         <Button
@@ -41,19 +41,19 @@ function AccountManager() {
           className="bg-blue-700 w-[70px] h-[30px] rounded-md"
           onClick={handleButtonClick}
         >
-          Create account
+          Thêm
         </Button>
       </div>
       <Modal
-        title="Add Account"
+        title="Thêm tài khoản"
         visible={showModal}
         onCancel={() => setShowModal(false)}
         footer={null}
       >
         <Form onFinish={handleFormSubmit}>
           <Form.Item
-            label="Name"
-            name="username"
+            label="Tên"
+            name="name"
             rules={[
               {
                 required: true,
@@ -66,14 +66,33 @@ function AccountManager() {
             <Input />
           </Form.Item>
           <Form.Item
-            label="Password"
+            label="Mât khẩu"
             name="password"
-            type="password"
             rules={[
               {
                 required: true,
-                message: "Please require password",
-              }
+                message: "Please enter the email",
+              },
+              {
+                type: "password",
+                message: "Please enter a valid password",
+              },
+            ]}
+          >
+            <Input />
+          </Form.Item>
+          <Form.Item
+            label="Vai trò"
+            name="role"
+            rules={[
+              {
+                required: true,
+                message: "Please enter the role",
+              },
+              {
+                type: "password",
+                message: "Please enter a valid role",
+              },
             ]}
             value={password}
             onChange={(e) => setPassword(e.target.value)}
@@ -82,7 +101,7 @@ function AccountManager() {
           </Form.Item>
           <Form.Item>
             <Button type="primary" htmlType="submit" className="bg-blue-600">
-              Create Account
+              Tạo tài khoản
             </Button>
           </Form.Item>
         </Form>
@@ -98,17 +117,17 @@ function AccountManager() {
               dataIndex: "id",
             },
             {
-              title: "Username",
+              title: "Tên đăng nhập",
               dataIndex: "username",
             },
             {
-              title: "Password",
+              title: "Mật khẩu",
               render: () => {
                 return <span>********</span>;
               },
             },
             {
-              title: "Role",
+              title: "Vai trò",
               dataIndex: "role",
               render: (role) => {
                 let roleText = "";
@@ -124,7 +143,7 @@ function AccountManager() {
               },
             },
             {
-              title: "Create At",
+              title: "Ngày tạo",
               dataIndex: "createAt",
             },
           ]}

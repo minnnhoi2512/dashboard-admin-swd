@@ -1,6 +1,6 @@
 import { Avatar, Rate, Space, Table, Typography } from "antd";
 import { useEffect, useState } from "react";
-import { getCustomers, getInventory } from "../../../API";
+import { getStore } from "../../../API";
 
 function StoreDetail() {
   const [loading, setLoading] = useState(false);
@@ -8,8 +8,8 @@ function StoreDetail() {
 
   useEffect(() => {
     setLoading(true);
-    getCustomers().then((res) => {
-      setDataSource(res.users);
+    getStore().then((res) => {
+      setDataSource(res.data);
       setLoading(false);
     });
   }, []);
@@ -42,6 +42,9 @@ function StoreDetail() {
             {
               title: "Image",
               dataIndex: "Image",
+              render: (Image) => {
+                return <Avatar src={Image} />;
+              },
             },
             {
               title: "Origin",

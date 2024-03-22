@@ -13,6 +13,19 @@ function PendingOrder() {
       setLoading(false);
     });
   }, []);
+
+  const getStatusColor = (status) => {
+    if (status === "Pending") {
+      return "yellow";
+    } else if (status === "Canceled") {
+      return "red";
+    } else if (status === "Success") {
+      return "green";
+    } else {
+      return "";
+    }
+  };
+
   /// note : cái dataIndex : để fetch data , nên
   return (
     <Space size={20} direction="vertical" className="items-center  ">
@@ -27,19 +40,19 @@ function PendingOrder() {
               dataIndex: "CustomerOrderId",
             },
             {
-              title: "Customer",
+              title: "Khách hàng",
               dataIndex: "Customer_Name",
             },
             {
-              title: "Product Price",
+              title: "Tiền sản phẩm",
               dataIndex: "Total",
             },
             {
-              title: "ShippingPrice",
+              title: "Tiền vận chuyển",
               dataIndex: "ShippingPrice",
             },
             {
-              title: "Date",
+              title: "Ngày",
               dataIndex: "OrderDate",
               render: (OrderDate) => {
                 const formattedDate = moment(OrderDate).format(
@@ -49,8 +62,11 @@ function PendingOrder() {
               },
             },
             {
-              title: "Status",
+              title: "Trạng thái",
               dataIndex: "Status",
+              render: (status) => (
+                <span style={{ color: getStatusColor(status) }}>{status}</span>
+              ),
             },
             {
               title: "To",

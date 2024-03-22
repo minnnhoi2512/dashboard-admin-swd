@@ -1,6 +1,6 @@
 import { Avatar, Rate, Space, Table, Typography } from "antd";
 import { useEffect, useState } from "react";
-import { getDeposit} from "../../API";
+import { getDeposit } from "../../API";
 
 function Deposit() {
   const [loading, setLoading] = useState(false);
@@ -23,22 +23,22 @@ function Deposit() {
           loading={loading}
           columns={[
             {
-              title: "No",
+              title: "ID",
               dataIndex: "DepositId",
             },
             {
-              title: "Amount",
+              title: "Tổng",
               dataIndex: "Amount",
             },
             {
-              title: "Method",
+              title: "Phương thức",
               dataIndex: "Method",
             },
 
             {
-              title: "Status",
+              title: "Trạng thái",
               dataIndex: "Status",
-              render : (Status)=>{
+              render: (Status) => {
                 let text = "";
                 let textColorClass = "";
 
@@ -51,14 +51,14 @@ function Deposit() {
                 }
 
                 return <span className={textColorClass}>{text}</span>;
-              }
+              },
             },
             {
-              title: "Date",
+              title: "Ngày",
               dataIndex: "Date",
             },
             {
-              title: "To",
+              title: "Khách hàng",
               dataIndex: "Name_Customer",
             },
           ]}

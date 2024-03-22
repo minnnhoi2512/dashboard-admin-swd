@@ -40,75 +40,25 @@ function Area() {
   return (
     <Space size={10} direction="vertical">
       <Typography.Title level={4} className="text-center mt-2">
-        Building
+        Khu vực
       </Typography.Title>
-      {/* <div className="flex justify-end mr-12">
-        <Button
-          type="primary"
-          className="bg-blue-700 w-[70px] h-[30px] rounded-md"
-          onClick={handleButtonClick}
-        >
-          Add
-        </Button>
-      </div>
-      <Modal
-        title="Add Area"
-        visible={showModal}
-        onCancel={() => setShowModal(false)}
-        footer={null}
-      >
-        <Form onFinish={handleFormSubmit}>
-          <Form.Item
-            label="AreaName"
-            name="AreaName"
-            rules={[
-              {
-                required: true,
-                message: "Please enter the name",
-              },
-            ]}
-          >
-            <Input />
-          </Form.Item>
-          <Form.Item
-            label="Bulding"
-            name="Bulding"
-            rules={[
-              {
-                required: true,
-                message: "Please enter the Bulding",
-              },
-              {
-                type: "Bulding",
-                message: "Please enter a valid Bulding",
-              },
-            ]}
-          >
-            <Input />
-          </Form.Item>
-          <Form.Item>
-            <Button type="primary" htmlType="submit" className="bg-blue-600">
-              Create Account
-            </Button>
-          </Form.Item>
-        </Form>
-      </Modal> */}
+
       <div className="flex justify-center ">
         <Table
           style={{ width: 1200 }}
           loading={loading}
           columns={[
             {
-              title: "BuildingID",
+              title: "ID Tòa",
               dataIndex: "BuildingId",
             },
             {
-              title: "AreaName",
+              title: "Tên khu vực",
               dataIndex: "AreaName",
             },
 
             {
-              title: "Building",
+              title: "Tòa",
               dataIndex: "BuildingName",
             },
           ]}
