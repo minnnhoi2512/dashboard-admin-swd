@@ -1,23 +1,26 @@
-import { Avatar, Rate, Space, Table, Typography } from "antd";
+import { Avatar, Space, Table, Typography } from "antd";
 import { useEffect, useState } from "react";
-import { getStore } from "../../../API";
-
+import { getListProductInStore } from "../../../API";
+import { useParams } from "react-router-dom";
+import moment from "moment";
 function StoreDetail() {
   const [loading, setLoading] = useState(false);
   const [dataSource, setDataSource] = useState([]);
-
+  const { id } = useParams(); // Retrieve the URL parameter
+  const [storeName, setStoreName] = useState("");
   useEffect(() => {
     setLoading(true);
-    getStore().then((res) => {
+    getListProductInStore(id).then((res) => { // Pass the id parameter to the API call
       setDataSource(res.data);
+      setStoreName(res.data[0].StoreName)
       setLoading(false);
     });
-  }, []);
-  /// note : cái dataIndex : để fetch data , cái này dung api của ProductInStorebyID
+  }, [id]); // Add id to the dependency array to trigger the effect when id changes
+
   return (
-    <Space size={20} direction="vertical" className="items-center  ">
-      <Typography.Title level={4}>Store</Typography.Title>
-      <div className="flex justify-center ">
+    <Space size={20} direction="vertical" className="items-center">
+      <Typography.Title level={4}>Sản phẩm của cửa hàng: {storeName}</Typography.Title>
+      <div className="flex justify-center">
         <Table
           style={{ width: 1200 }}
           loading={loading}
@@ -27,48 +30,68 @@ function StoreDetail() {
               dataIndex: "ProductInStoreId",
             },
             {
-              title: "StoreName",
+              title: "Tên cửa hàng",
               dataIndex: "StoreName",
             },
             {
-              title: "Address",
+              title: "Địa chỉ",
               dataIndex: "Address",
             },
-
             {
-              title: "NameProduct",
+              title: "Sản phẩm",
               dataIndex: "Name",
             },
             {
-              title: "Image",
+              title: "Hình ảnh",
               dataIndex: "Image",
               render: (Image) => {
                 return <Avatar src={Image} />;
               },
             },
             {
-              title: "Origin",
+              title: "Xuất xứ",
               dataIndex: "Origin",
             },
             {
-              title: "MfgDate",
+              title: "Ngày sản xuất",
               dataIndex: "MfgDate",
+              render: (MfgDate) => {
+                const formattedDate = moment(MfgDate).format(
+                  "YYYY-MM-DD"
+                );
+                return <span>{formattedDate}</span>;
+              },
             },
             {
-              title: "ExpDate",
+              title: "Ngày hết hạn",
               dataIndex: "ExpDate",
+              render: (ExpDate) => {
+                const formattedDate = moment(ExpDate).format(
+                  "YYYY-MM-DD"
+                );
+                return <span>{formattedDate}</span>;
+              },
             },
             {
-              title: "CategoryName",
-              dataIndex: " CategoryName",
+              title: "Phân loại",
+              dataIndex: "CategoryName",
             },
             {
-              title: "Quantity",
-              dataIndex: " Quantity",
+              title: "Tồn kho",
+              dataIndex: "Remaining",
             },
             {
-              title: "Status",
-              dataIndex: " Status",
+              title: "Trạng thái",
+              dataIndex: "Status",
+              render: (status) => {
+                if (status === 1) {
+                  return <span style={{ color: "green" }}>Còn bán</span>;
+                } else if (status === 0) {
+                  return <span style={{ color: "red" }}>Ngưng bán</span>;
+                } else {
+                  return null;
+                }
+              }
             },
           ]}
           dataSource={dataSource}
@@ -80,4 +103,5 @@ function StoreDetail() {
     </Space>
   );
 }
+
 export default StoreDetail;

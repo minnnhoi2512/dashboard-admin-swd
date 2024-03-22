@@ -40,7 +40,7 @@ const items = [
   ]),
   getItem("Sản phẩm", "product", <AppstoreOutlined />, [
     getItem("Nhãn hàng", "brand", null, null, "link", "/brand"),
-    getItem("Cửa hàng", "store", null, null, "link", "/store_detail"),
+    getItem("Cửa hàng", "store", null, null, "link", "/store"),
     getItem("Sản phẩm", "product", null, null, "link", "/product"),
   ]),
   getItem("Đơn hàng", "order", <MailOutlined />, [

@@ -87,5 +87,9 @@ export const getTransaction = () => {
 export const getStore = () => {
   return fetch(`https://onlinemarket-api.nguyenminhhai.us/api/v1/store?page_number=1&page_size=100`).then((res) => res.json());
 };
+export const getListProductInStore = (id) => {
+  return fetch(`https://onlinemarket-api.nguyenminhhai.us/api/v1/products-in-store/${id}?page_number=1&page_size=100`).then((res) => res.json());
+};
+
 
 
