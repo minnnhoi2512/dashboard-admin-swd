@@ -3,7 +3,7 @@ import AdminPage from "./Pages/AdminPage";
 import Dashboard from "./Pages/Dashboard/Dashboard";
 import Area from "./Pages/Location/Area";
 import Login from "./Pages/Login/Login";
-import { Navigate, Route, Routes, Switch } from "react-router-dom";
+import { Navigate, Route, Routes } from "react-router-dom";
 import Wallet from "./Pages/Money/Wallet";
 import Transaction from "./Pages/Money/Transaction";
 import Deposit from "./Pages/Money/Deposit";
