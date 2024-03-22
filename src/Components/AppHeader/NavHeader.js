@@ -19,7 +19,7 @@ function AppHeader() {
 
       <Link to="/">
         <button className="bg-neutral-400 rounded-md w-[80px] h-[30px]">
-          Logout
+          Đăng xuất
         </button>
       </Link>
     </div>

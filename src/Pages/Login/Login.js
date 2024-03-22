@@ -24,10 +24,18 @@ export default function Login() {
 
     try {
       const data = await loginAccount(username, password);
-      console.log(data);
+      // console.log(data.account.recordsets[0][0]);
       if (data.token) {
-        localStorage.setItem("account", data.account.recordsets[0]);
-        navigate("/admin");
+
+        if (data.account.recordsets[0][0].role === 1) {
+          localStorage.setItem("role", data.account.recordsets[0][0].role);
+          localStorage.setItem("storeId", data.account.recordsets[0][0].StoreId);
+          navigate("/store");
+        }
+        else if (data.account.recordsets[0][0].role === 3){
+          localStorage.setItem("role", data.account.recordsets[0][0].role);
+          navigate("/admin");
+        } 
       } else {
         setError("Invalid username or password");
       }

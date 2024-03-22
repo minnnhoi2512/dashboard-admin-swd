@@ -1,16 +1,23 @@
 import { Avatar, Rate, Space, Table, Typography } from "antd";
 import { useEffect, useState } from "react";
-import { getPendingOrder } from "../../API";
+import { getListOrderStore } from "../../API";
 import moment from "moment";
 function OrderOfCustomer() {
   const [loading, setLoading] = useState(false);
   const [dataSource, setDataSource] = useState([]);
 
   useEffect(() => {
+    const storeId = localStorage.getItem("storeId");
     setLoading(true);
-    getPendingOrder().then((res) => {
-      setDataSource(res);
+    getListOrderStore(storeId).then((res) => {
+      console.log(res.data);
+      if(res.status === 200 ) {
+        setDataSource(res.data);
+      }else  {
+        setDataSource(null)
+      }
       setLoading(false);
+
     });
   }, []);
 
@@ -37,19 +44,22 @@ function OrderOfCustomer() {
           columns={[
             {
               title: "#",
-              dataIndex: "CustomerOrderId",
+              dataIndex: "",
             },
             {
-              title: "Khách hàng",
-              dataIndex: "Customer_Name",
+              title: "Tên sản phẩm",
+              dataIndex: "Name",
             },
             {
-              title: "Tiền sản phẩm",
-              dataIndex: "Total",
+              title: "Hình ảnh",
+              dataIndex: "Image",
+              render: (Image) => {
+                return <Avatar src={Image} />;
+              },
             },
             {
-              title: "Tiền vận chuyển",
-              dataIndex: "ShippingPrice",
+              title: "Số lượng",
+              dataIndex: "ProductQuantity",
             },
             {
               title: "Ngày",
@@ -60,11 +70,6 @@ function OrderOfCustomer() {
                 );
                 return <span>{formattedDate}</span>;
               },
-            },
-
-            {
-              title: "To",
-              dataIndex: "BuildingName",
             },
           ]}
           dataSource={dataSource}

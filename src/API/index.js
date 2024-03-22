@@ -91,5 +91,9 @@ export const getListProductInStore = (id) => {
   return fetch(`https://onlinemarket-api.nguyenminhhai.us/api/v1/products-in-store/${id}?page_number=1&page_size=100`).then((res) => res.json());
 };
 
+export const getListOrderStore = (id) => {
+  return fetch(`https://onlinemarket-api.nguyenminhhai.us/api/v1/order-detail/store/${id}`).then((res) => res.json());
+};
+
 
 

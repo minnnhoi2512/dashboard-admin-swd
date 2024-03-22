@@ -14,7 +14,7 @@ export default function StorePage() {
           <MenuStore />
         </div>
 
-        <div className=" flex ">
+        <div className=" flex mx-auto mt-8">
           <Outlet />
         </div>
       </div>
