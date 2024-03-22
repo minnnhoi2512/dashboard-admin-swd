@@ -27,5 +27,5 @@ export const getPaidOrders = () => {
 };
 
 export const getShippers = (page_number) => {
-  return fetch(`https://onlinemarket-api.nguyenminhhai.us/api/v1/shipper?page_number=${page_number}&page_size=5`).then((res) => res.json());
+  return fetch(`https://onlinemarket-api.nguyenminhhai.us/api/v1/shipper?page_number=${page_number}&page_size=20`).then((res) => res.json());
 };
