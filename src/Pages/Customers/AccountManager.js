@@ -5,9 +5,10 @@ import { getAccounts } from "../../API";
 function AccountManager() {
   const [loading, setLoading] = useState(false);
   const [dataSource, setDataSource] = useState([]);
-
   const [showModal, setShowModal] = useState(false);
-
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+  const [role, setRole] = useState("");
   const handleButtonClick = () => {
     setShowModal(true);
   };
@@ -22,7 +23,7 @@ function AccountManager() {
 
   useEffect(() => {
     setLoading(true);
-    getAccounts(3).then((res) => {
+    getAccounts().then((res) => {
       setDataSource(res);
       setLoading(false);
       console.log(res);
@@ -40,7 +41,7 @@ function AccountManager() {
           className="bg-blue-700 w-[70px] h-[30px] rounded-md"
           onClick={handleButtonClick}
         >
-          Add
+          Create account
         </Button>
       </div>
       <Modal
@@ -52,29 +53,30 @@ function AccountManager() {
         <Form onFinish={handleFormSubmit}>
           <Form.Item
             label="Name"
-            name="name"
+            name="username"
             rules={[
               {
                 required: true,
                 message: "Please enter the name",
               },
             ]}
+            value={username}
+            onChange={(e) => setUsername(e.target.value)}
           >
             <Input />
           </Form.Item>
           <Form.Item
-            label="Email"
-            name="email"
+            label="Password"
+            name="password"
+            type="password"
             rules={[
               {
                 required: true,
-                message: "Please enter the email",
-              },
-              {
-                type: "email",
-                message: "Please enter a valid email",
-              },
+                message: "Please require password",
+              }
             ]}
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
           >
             <Input />
           </Form.Item>

@@ -18,8 +18,8 @@ export const getComments = () => {
 };
 
 
-export const getAccounts = (role) => {
-  return fetch(`https://onlinemarket-api.nguyenminhhai.us/api/v1/account?role=${role}`).then((res) => res.json());
+export const getAccounts = () => {
+  return fetch(`https://onlinemarket-api.nguyenminhhai.us/api/v1/account`).then((res) => res.json());
 };
 
 export const getPaidOrders = () => {
@@ -83,6 +83,28 @@ export const getDeposit = () => {
 export const getTransaction = () => {
   return fetch(`https://onlinemarket-api.nguyenminhhai.us/api/v1/transaction?page_number=1&page_size=100`).then((res) => res.json());
 }
+
+
+export const createAccount = (username, password,role) => {
+  const url = 'https://onlinemarket-api.nguyenminhhai.us/api/v1/account?action=register';
+
+  const requestOptions = {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ username, password ,role})
+  };
+
+  return fetch(url, requestOptions)
+    .then((response) => response.json())
+    .then((data) => {
+      // Handle the response data here
+      return data;
+    })
+    .catch((error) => {
+      // Handle any errors that occurred during the request
+      console.error('Error:', error);
+    });
+};
 
 
 
