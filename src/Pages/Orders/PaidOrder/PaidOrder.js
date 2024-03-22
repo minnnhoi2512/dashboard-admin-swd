@@ -29,7 +29,7 @@ function PaidOrder() {
   const loadShippers = () => {
     setLoadingShipper(true);
     getShippers().then((res) => {
-      setShippers(res);
+      setShippers(res.data);
       setLoadingShipper(false);
     });
   };
@@ -143,7 +143,7 @@ function PaidOrder() {
         ) : (
           <select>
             {shippers.map((shipper) => (
-              <option key={shipper.id}>{shipper.Name}</option>
+              <li key={shipper.id}>{shipper.Name}</li>
             ))}
           </select>
         )}
