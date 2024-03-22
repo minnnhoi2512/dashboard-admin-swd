@@ -16,29 +16,29 @@ function Brand() {
   /// note : cái dataIndex : để fetch data , nên
   return (
     <Space size={20} direction="vertical" className="items-center  ">
-      <Typography.Title level={4}>Brand</Typography.Title>
+      <Typography.Title level={4}>Thương hiệu</Typography.Title>
       <div className="flex justify-center ">
         <Table
           style={{ width: 1200 }}
           loading={loading}
           columns={[
             {
-              title: "Image",
+              title: "Ảnh",
               dataIndex: "Image",
               render: (Image) => {
                 return <Avatar src={Image} />;
               },
             },
             {
-              title: "Name",
+              title: "Tên",
               dataIndex: "Name",
             },
             {
-              title: "QuantityStore",
+              title: "Số lượng",
               dataIndex: "StoreQuantity",
             },
             {
-              title: "Status",
+              title: "Trạng thái",
               dataIndex: "Status",
             },
           ]}

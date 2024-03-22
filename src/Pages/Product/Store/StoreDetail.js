@@ -10,16 +10,19 @@ function StoreDetail() {
   const [storeName, setStoreName] = useState("");
   useEffect(() => {
     setLoading(true);
-    getListProductInStore(id).then((res) => { // Pass the id parameter to the API call
+    getListProductInStore(id).then((res) => {
+      // Pass the id parameter to the API call
       setDataSource(res.data);
-      setStoreName(res.data[0].StoreName)
+      setStoreName(res.data[0].StoreName);
       setLoading(false);
     });
   }, [id]); // Add id to the dependency array to trigger the effect when id changes
 
   return (
     <Space size={20} direction="vertical" className="items-center">
-      <Typography.Title level={4}>Sản phẩm của cửa hàng: {storeName}</Typography.Title>
+      <Typography.Title level={4}>
+        Sản phẩm của cửa hàng: {storeName}
+      </Typography.Title>
       <div className="flex justify-center">
         <Table
           style={{ width: 1200 }}
@@ -30,7 +33,7 @@ function StoreDetail() {
               dataIndex: "ProductInStoreId",
             },
             {
-              title: "Tên cửa hàng",
+              title: "StoreName",
               dataIndex: "StoreName",
             },
             {
@@ -56,9 +59,7 @@ function StoreDetail() {
               title: "Ngày sản xuất",
               dataIndex: "MfgDate",
               render: (MfgDate) => {
-                const formattedDate = moment(MfgDate).format(
-                  "YYYY-MM-DD"
-                );
+                const formattedDate = moment(MfgDate).format("YYYY-MM-DD");
                 return <span>{formattedDate}</span>;
               },
             },
@@ -66,9 +67,7 @@ function StoreDetail() {
               title: "Ngày hết hạn",
               dataIndex: "ExpDate",
               render: (ExpDate) => {
-                const formattedDate = moment(ExpDate).format(
-                  "YYYY-MM-DD"
-                );
+                const formattedDate = moment(ExpDate).format("YYYY-MM-DD");
                 return <span>{formattedDate}</span>;
               },
             },
@@ -91,7 +90,7 @@ function StoreDetail() {
                 } else {
                   return null;
                 }
-              }
+              },
             },
           ]}
           dataSource={dataSource}

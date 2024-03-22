@@ -16,30 +16,30 @@ function Product() {
   /// note : cái dataIndex : để fetch data , cái này dung api của ProductInStorebyID
   return (
     <Space size={20} direction="vertical" className="items-center  ">
-      <Typography.Title level={4}>Products</Typography.Title>
+      <Typography.Title level={4}>Sản phẩm</Typography.Title>
       <div className="flex justify-center ">
         <Table
           style={{ width: 1200 }}
           loading={loading}
           columns={[
             {
-              title: "Product",
+              title: "Tên sản phẩm",
               dataIndex: "Name",
             },
-            
+
             {
-              title: "Image",
+              title: "Ảnh",
               dataIndex: "Image",
               render: (Image) => {
                 return <Avatar src={Image} />;
               },
             },
             {
-              title: "Origin",
+              title: "Nguồn gốc",
               dataIndex: "Origin",
             },
             {
-              title: "MfgDate",
+              title: "Ngày sản xuất",
               dataIndex: "MfgDate",
               render: (MfgDate) => {
                 const formattedDate = moment(MfgDate).format(
@@ -49,7 +49,7 @@ function Product() {
               },
             },
             {
-              title: "ExpDate",
+              title: "Hạn sử dụng",
               dataIndex: "ExpDate",
               render: (ExpDate) => {
                 const formattedDate = moment(ExpDate).format(
@@ -59,11 +59,11 @@ function Product() {
               },
             },
             {
-              title: "Category",
+              title: "Mục sản phẩm",
               dataIndex: "CategoryName",
             },
             {
-              title: "Origin",
+              title: "Nguồn gốc",
               dataIndex: "Origin",
             },
           ]}
