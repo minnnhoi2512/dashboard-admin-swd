@@ -1,9 +1,7 @@
-import { Avatar, Rate, Space, Table, Typography, Modal, Select, Button } from "antd";
+import { Avatar, Rate, Space, Table, Typography, Modal } from "antd";
 import { useEffect, useState } from "react";
 import { getPaidOrders, getShippers } from "../../../API";
 import moment from "moment";
-
-const { Option } = Select;
 
 function PaidOrder() {
   const [loading, setLoading] = useState(false);
@@ -11,9 +9,8 @@ function PaidOrder() {
   const [dataSource, setDataSource] = useState([]);
   const [shippers, setShippers] = useState([]);
   const [modalVisible, setModalVisible] = useState(false);
-  const [selectedOrderId, setSelectedOrderId] = useState('');
-  const [selectedShipperId, setSelectedShipperId] = useState('');
-
+  const [selectedOrderId, setSelectedOrderId] = useState(null);
+  // const [shippers, setListShipper] = useState([]);
   useEffect(() => {
     setLoading(true);
     getPaidOrders().then((res) => {
@@ -21,47 +18,46 @@ function PaidOrder() {
       setLoading(false);
     });
   }, []);
-
+  // const handleChooseShipper = (CustomerOrderId) => {
+  //   console.log(CustomerOrderId);
+  // };
   const handleChooseShipper = (CustomerOrderId) => {
     setSelectedOrderId(CustomerOrderId);
-    console.log(CustomerOrderId);
     loadShippers();
     setModalVisible(true);
   };
-
   const loadShippers = () => {
     setLoadingShipper(true);
     getShippers().then((res) => {
-      setShippers(res.data);
+      setShippers(res);
       setLoadingShipper(false);
     });
   };
 
-  const handleShipperSelect = (shipperId) => {
-    console.log(shipperId);
-    setSelectedShipperId(shipperId);
-  };
-
-  const handleConfirmShipper = () => {
-    // Handle shipper selection here
-    // You can make an API call or perform any other necessary actions
-    console.log("Selected Order ID:", selectedOrderId);
-    console.log("Selected Shipper ID:", selectedShipperId);
-    setModalVisible(false);
-  };
-
+  /// note : cái dataIndex : để fetch data , nên
   return (
     <Space size={20} direction="vertical" className="  ">
       <Typography.Title level={4} className="text-center mt-8">
-        Đơn đã thanh toán
+        PaidOrder
       </Typography.Title>
+      {/* <div>
+        <Link to="/paid_order">
+          <button className="rounded-md bg-blue-400 w-[100px] h-[30px]">
+            HaveShipper
+          </button>
+        </Link>
+        <Link to="/paid_order_noshipper">
+          <button className="rounded-md ml-5 bg-blue-400 w-[100px]  h-[30px]">
+            NoShipper
+          </button>
+        </Link>
+      </div> */}
 
       <div className="flex justify-center ">
         <Table
           style={{ width: 1200 }}
           loading={loading}
           columns={[
-            // ...existing columns
             {
               title: "#",
               dataIndex: "CustomerOrderId",
@@ -120,9 +116,11 @@ function PaidOrder() {
               render: (CustomerOrderId) => {
                 return (
                   <span>
-                    <Button onClick={() => handleChooseShipper(CustomerOrderId)}>
-                      Chọn Shipper
-                    </Button>
+                    <button
+                      onClick={() => handleChooseShipper(CustomerOrderId)}
+                    >
+                      chọn Shipper
+                    </button>
                   </span>
                 );
               },
@@ -134,45 +132,23 @@ function PaidOrder() {
           }}
         ></Table>
       </div>
-
       <Modal
         title="Chọn Shipper"
         visible={modalVisible}
         onCancel={() => setModalVisible(false)}
-        footer={[
-          <Button key="cancel" onClick={() => setModalVisible(false)}>
-            Hủy
-          </Button>,
-          <Button
-            key="confirm"
-            type="primary"
-            onClick={handleConfirmShipper}
-            disabled={!selectedShipperId}
-          >
-            Xác nhận
-          </Button>,
-        ]}
+        footer={null}
       >
         {loadingShipper ? (
           <p>Loading shippers...</p>
         ) : (
-          
-          <Select
-            style={{ width: "100%" }}
-            placeholder="Tên"
-            onChange={handleShipperSelect}
-            value={selectedShipperId}
-          >
+          <ul>
             {shippers.map((shipper) => (
-              <Option key={shipper.id} value={shipper.id}>
-                {shipper.Name}
-              </Option>
+              <li key={shipper.id}>{shipper.name}</li>
             ))}
-          </Select>
+          </ul>
         )}
       </Modal>
     </Space>
   );
 }
-
 export default PaidOrder;
