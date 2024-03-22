@@ -31,7 +31,7 @@ function AccountManager() {
 
   return (
     <Space size={20} direction="vertical">
-      <Typography.Title level={4} className="text-center">
+      <Typography.Title level={4} className="text-center mt-5">
         Account
       </Typography.Title>
       <div className="flex justify-end mr-12">
