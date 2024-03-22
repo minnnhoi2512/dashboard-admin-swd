@@ -21,6 +21,7 @@ import DashboardStore from "./Pages/Dashboard/DashboardStore";
 import ProductInStore from "./Pages/Product/Store/ProductInStore";
 import OrderOfCustomer from "./Pages/Orders/OrderOfCustomer";
 import StoreTransaction from "./Pages/Money/StoreTransaction";
+import Store from "./Pages/Product/Store/Store";
 
 function App() {
   return (
@@ -35,7 +36,7 @@ function App() {
           <Route path="/admin/area" element={<Area />}></Route>
           <Route path="/admin/accounts" element={<AccountManager />}></Route>
           <Route path="/admin/brand" element={<Brand />}></Route>
-          <Route path="/admin/store_detail" element={<StoreDetail />}></Route>
+          <Route path="/admin/store/:id" element={<StoreDetail />}></Route>
           <Route path="/admin/product" element={<Product />}></Route>
           <Route path="/admin/pending_order" element={<PendingOrder />}></Route>
           <Route
@@ -44,7 +45,8 @@ function App() {
           ></Route>
           <Route path="/admin/success_order" element={<SuccessOrder />}></Route>
           <Route path="/admin/paid_order" element={<PaidOrder />}></Route>
-
+          <Route path="/admin/paid_order" element={<PaidOrder />}></Route>
+          <Route path="/admin/store" element={<Store />}></Route>
           <Route path="/admin/deposit" element={<Deposit />}></Route>
           <Route path="/admin/transaction" element={<Transaction />}></Route>
           <Route path="/admin/wallet" element={<Wallet />}></Route>

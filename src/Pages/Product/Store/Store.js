@@ -19,7 +19,7 @@ function Store() {
       return "";
     }
   };
-  
+
   useEffect(() => {
     setLoading(true);
     getStore().then((res) => {
@@ -27,10 +27,10 @@ function Store() {
       setLoading(false);
     });
   }, []);
-  
+
   const handleRowClick = (record) => {
     // Navigate to store detail page with record.StoreId
-    navigate(`/store/${record.StoreId}`);
+    navigate(`/admin/store/${record.StoreId}`);
   };
 
   return (

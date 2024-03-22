@@ -53,16 +53,6 @@ const items = [
       "/store/order_customer"
     ),
   ]),
-  getItem("Tiền", "money", <PieChartOutlined />, [
-    getItem(
-      "Giao dịch",
-      "transaction",
-      null,
-      null,
-      "link",
-      "/store/store_transaction"
-    ),
-  ]),
 ];
 
 const MenuStore = () => {
