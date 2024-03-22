@@ -1,15 +1,15 @@
 import { Avatar, Rate, Space, Table, Typography } from "antd";
 import { useEffect, useState } from "react";
-import { getCustomers, getInventory } from "../../API";
-
+import { getPendingOrder } from "../../API";
+import moment from "moment";
 function PendingOrder() {
   const [loading, setLoading] = useState(false);
   const [dataSource, setDataSource] = useState([]);
 
   useEffect(() => {
     setLoading(true);
-    getCustomers().then((res) => {
-      setDataSource(res.users);
+    getPendingOrder().then((res) => {
+      setDataSource(res);
       setLoading(false);
     });
   }, []);
@@ -23,20 +23,38 @@ function PendingOrder() {
           loading={loading}
           columns={[
             {
-              title: "OrderID",
-              dataIndex: "OrderID",
+              title: "#",
+              dataIndex: "CustomerOrderId",
             },
             {
               title: "Customer",
-              dataIndex: "Customer",
+              dataIndex: "Customer_Name",
             },
             {
-              title: "Shipper",
-              dataIndex: "Shipper",
+              title: "Product Price",
+              dataIndex: "Total",
+            },
+            {
+              title: "ShippingPrice",
+              dataIndex: "ShippingPrice",
+            },
+            {
+              title: "Date",
+              dataIndex: "OrderDate",
+              render: (OrderDate) => {
+                const formattedDate = moment(OrderDate).format(
+                  "YYYY-MM-DD HH:mm:ss"
+                );
+                return <span>{formattedDate}</span>;
+              },
             },
             {
               title: "Status",
               dataIndex: "Status",
+            },
+            {
+              title: "To",
+              dataIndex: "BuildingName",
             },
           ]}
           dataSource={dataSource}

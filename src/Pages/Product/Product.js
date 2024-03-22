@@ -1,6 +1,6 @@
 import { Avatar, Rate, Space, Table, Typography } from "antd";
 import { useEffect, useState } from "react";
-import { getCustomers, getInventory } from "../../API";
+import { getProductsInSystem } from "../../API";
 
 function Product() {
   const [loading, setLoading] = useState(false);
@@ -8,40 +8,31 @@ function Product() {
 
   useEffect(() => {
     setLoading(true);
-    getCustomers().then((res) => {
-      setDataSource(res.users);
+    getProductsInSystem().then((res) => {
+      setDataSource(res.data);
       setLoading(false);
     });
   }, []);
   /// note : cái dataIndex : để fetch data , cái này dung api của ProductInStorebyID
   return (
     <Space size={20} direction="vertical" className="items-center  ">
-      <Typography.Title level={4}>Product In Store</Typography.Title>
+      <Typography.Title level={4}>Products</Typography.Title>
       <div className="flex justify-center ">
         <Table
           style={{ width: 1200 }}
           loading={loading}
           columns={[
             {
-              title: "No",
-              dataIndex: "ProductInStoreId",
-            },
-            {
-              title: "StoreName",
-              dataIndex: "StoreName",
-            },
-            {
-              title: "Address",
-              dataIndex: "Address",
-            },
-
-            {
-              title: "NameProduct",
+              title: "Product",
               dataIndex: "Name",
             },
+            
             {
               title: "Image",
               dataIndex: "Image",
+              render: (Image) => {
+                return <Avatar src={Image} />;
+              },
             },
             {
               title: "Origin",
@@ -56,16 +47,12 @@ function Product() {
               dataIndex: "ExpDate",
             },
             {
-              title: "CategoryName",
-              dataIndex: " CategoryName",
+              title: "Category",
+              dataIndex: "CategoryName",
             },
             {
-              title: "Quantity",
-              dataIndex: " Quantity",
-            },
-            {
-              title: "Status",
-              dataIndex: " Status",
+              title: "Origin",
+              dataIndex: "Origin",
             },
           ]}
           dataSource={dataSource}

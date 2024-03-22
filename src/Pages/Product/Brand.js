@@ -1,6 +1,6 @@
 import { Avatar, Rate, Space, Table, Typography } from "antd";
 import { useEffect, useState } from "react";
-import { getCustomers, getInventory } from "../../API";
+import { getBrands } from "../../API";
 
 function Brand() {
   const [loading, setLoading] = useState(false);
@@ -8,8 +8,8 @@ function Brand() {
 
   useEffect(() => {
     setLoading(true);
-    getCustomers().then((res) => {
-      setDataSource(res.users);
+    getBrands().then((res) => {
+      setDataSource(res);
       setLoading(false);
     });
   }, []);
@@ -24,9 +24,9 @@ function Brand() {
           columns={[
             {
               title: "Image",
-              dataIndex: "image",
-              render: (link) => {
-                return <Avatar src={link} />;
+              dataIndex: "Image",
+              render: (Image) => {
+                return <Avatar src={Image} />;
               },
             },
             {
@@ -34,7 +34,7 @@ function Brand() {
               dataIndex: "Name",
             },
             {
-              title: "Quantity",
+              title: "QuantityStore",
               dataIndex: "StoreQuantity",
             },
             {

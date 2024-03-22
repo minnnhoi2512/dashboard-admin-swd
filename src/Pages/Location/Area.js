@@ -9,7 +9,7 @@ import {
   Typography,
 } from "antd";
 import { useEffect, useState } from "react";
-import { getCustomers, getInventory } from "../../API";
+import { getBuilding } from "../../API";
 
 function Area() {
   const [loading, setLoading] = useState(false);
@@ -30,8 +30,9 @@ function Area() {
 
   useEffect(() => {
     setLoading(true);
-    getCustomers().then((res) => {
-      setDataSource(res.users);
+    getBuilding().then((res) => {
+      setDataSource(res);
+      console.log(res);
       setLoading(false);
     });
   }, []);
@@ -39,9 +40,9 @@ function Area() {
   return (
     <Space size={10} direction="vertical">
       <Typography.Title level={4} className="text-center mt-2">
-        Area
+        Building
       </Typography.Title>
-      <div className="flex justify-end mr-12">
+      {/* <div className="flex justify-end mr-12">
         <Button
           type="primary"
           className="bg-blue-700 w-[70px] h-[30px] rounded-md"
@@ -91,15 +92,15 @@ function Area() {
             </Button>
           </Form.Item>
         </Form>
-      </Modal>
+      </Modal> */}
       <div className="flex justify-center ">
         <Table
           style={{ width: 1200 }}
           loading={loading}
           columns={[
             {
-              title: "ID",
-              dataIndex: "AreaID",
+              title: "BuildingID",
+              dataIndex: "BuildingId",
             },
             {
               title: "AreaName",
@@ -111,7 +112,7 @@ function Area() {
               dataIndex: "BuildingName",
             },
           ]}
-          // dataSource={dataSource}
+          dataSource={dataSource}
           pagination={{
             pageSize: 5,
           }}

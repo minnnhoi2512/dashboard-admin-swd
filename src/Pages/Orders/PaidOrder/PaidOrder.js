@@ -6,20 +6,16 @@ import { Link } from "react-router-dom";
 
 function PaidOrder() {
   const [loading, setLoading] = useState(false);
-  // const [loadingShipper, setLoadingShipper] = useState(false);
-  // const [dataSource, setDataSource] = useState([]);
+  const [loadingShipper, setLoadingShipper] = useState(false);
+  const [dataSource, setDataSource] = useState([]);
   // const [shippers, setListShipper] = useState([]);
-  // useEffect(() => {
-  //   setLoading(true);
-  //   getPaidOrders().then((res) => {
-  //     setDataSource(res);
-  //     setLoading(false);
-  //   });
-  //   getShippers().then((res) => {
-  //     setDataSource(res);
-  //     setLoadingShipper(false);
-  //   });
-  // }, []);
+  useEffect(() => {
+    setLoading(true);
+    getPaidOrders().then((res) => {
+      setDataSource(res);
+      setLoading(false);
+    });
+  }, []);
   const handleChooseShipper = (CustomerOrderId) => {
     console.log(CustomerOrderId);
   };
@@ -82,7 +78,7 @@ function PaidOrder() {
               dataIndex: "BuildingName",
             },
             {
-              title: "ShipperName",
+              title: "ID-Shipper",
               dataIndex: "ShipperId",
               render: (ShipperId) => {
                 let text = "";
@@ -115,7 +111,7 @@ function PaidOrder() {
               },
             },
           ]}
-          // dataSource={dataSource}
+          dataSource={dataSource}
           pagination={{
             pageSize: 5,
           }}
