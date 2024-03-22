@@ -1,7 +1,7 @@
 import { Avatar, Rate, Space, Table, Typography } from "antd";
 import { useEffect, useState } from "react";
 import { getProductsInSystem } from "../../API";
-
+import moment from "moment";
 function Product() {
   const [loading, setLoading] = useState(false);
   const [dataSource, setDataSource] = useState([]);
@@ -41,10 +41,22 @@ function Product() {
             {
               title: "MfgDate",
               dataIndex: "MfgDate",
+              render: (MfgDate) => {
+                const formattedDate = moment(MfgDate).format(
+                  "YYYY-MM-DD"
+                );
+                return <span>{formattedDate}</span>;
+              },
             },
             {
               title: "ExpDate",
               dataIndex: "ExpDate",
+              render: (ExpDate) => {
+                const formattedDate = moment(ExpDate).format(
+                  "YYYY-MM-DD"
+                );
+                return <span>{formattedDate}</span>;
+              },
             },
             {
               title: "Category",

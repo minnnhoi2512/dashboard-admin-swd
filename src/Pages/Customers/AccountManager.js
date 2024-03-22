@@ -1,7 +1,7 @@
 import { Button, Form, Input, Modal, Space, Table, Typography } from "antd";
 import { useEffect, useState } from "react";
 import { getAccounts } from "../../API";
-
+import moment from "moment";
 function AccountManager() {
   const [loading, setLoading] = useState(false);
   const [dataSource, setDataSource] = useState([]);
@@ -9,6 +9,7 @@ function AccountManager() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [role, setRole] = useState("");
+  
   const handleButtonClick = () => {
     setShowModal(true);
   };
@@ -145,6 +146,12 @@ function AccountManager() {
             {
               title: "Ngày tạo",
               dataIndex: "createAt",
+              render: (createAt) => {
+                const formattedDate = moment(createAt).format(
+                  "YYYY-MM-DD HH:mm:ss"
+                );
+                return <span>{formattedDate}</span>;
+              },
             },
           ]}
           dataSource={dataSource}
