@@ -32,7 +32,7 @@ function AccountManager() {
             },
             {
               title: "Password",
-              render: ()=>{
+              render: () => {
                 return <span>********</span>;
               }
             },
@@ -48,7 +48,7 @@ function AccountManager() {
                 } else if (role === 3) {
                   roleText = "ADMIN";
                 }
-            
+
                 return <span>{roleText}</span>;
               },
             },

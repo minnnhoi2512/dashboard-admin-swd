@@ -35,7 +35,7 @@ function PaidOrder() {
             },
             {
               title: "Customer",
-              dataIndex: "Name",
+              dataIndex: "Customer_Name",
             },
             {
               title: "Product Price",
