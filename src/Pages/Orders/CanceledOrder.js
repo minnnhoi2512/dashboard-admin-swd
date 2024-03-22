@@ -27,7 +27,7 @@ function CanceledOrder() {
   /// note : cái dataIndex : để fetch data , nên
   return (
     <Space size={20} direction="vertical" className="items-center  ">
-      <Typography.Title level={4}>Canceled</Typography.Title>
+      <Typography.Title level={4}>Đơn hàng đã hủy</Typography.Title>
       <div className="flex justify-center ">
         <Table
           style={{ width: 1200 }}

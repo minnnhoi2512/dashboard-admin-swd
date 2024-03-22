@@ -56,7 +56,7 @@ function Transaction() {
                 const formattedDate = moment(Date).format(
                   "YYYY-MM-DD HH:mm:ss"
                 );
-                return <span>{Date}</span>;
+                return <span>{formattedDate}</span>;
               },
             },
             {

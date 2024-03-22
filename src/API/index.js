@@ -26,8 +26,8 @@ export const getPaidOrders = () => {
   return fetch(`https://onlinemarket-api.nguyenminhhai.us/api/v1/customer-order?status=Paid`).then((res) => res.json());
 };
 
-export const getShippers = (page_number) => {
-  return fetch(`https://onlinemarket-api.nguyenminhhai.us/api/v1/shipper?page_number=${page_number}&page_size=20`).then((res) => res.json());
+export const getShippers = () => {
+  return fetch(`https://onlinemarket-api.nguyenminhhai.us/api/v1/shipper?page_number=1&page_size=100`).then((res) => res.json());
 };
 
 export const loginAccount = (username, password) => {
@@ -87,5 +87,9 @@ export const getTransaction = () => {
 export const getStore = () => {
   return fetch(`https://onlinemarket-api.nguyenminhhai.us/api/v1/store?page_number=1&page_size=100`).then((res) => res.json());
 };
+export const getListProductInStore = (id) => {
+  return fetch(`https://onlinemarket-api.nguyenminhhai.us/api/v1/products-in-store/${id}?page_number=1&page_size=100`).then((res) => res.json());
+};
+
 
 

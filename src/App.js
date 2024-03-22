@@ -7,7 +7,7 @@ import { Navigate, Route, Routes } from "react-router-dom";
 import Wallet from "./Pages/Money/Wallet";
 import Transaction from "./Pages/Money/Transaction";
 import Deposit from "./Pages/Money/Deposit";
-import PaidOrderNoShipper from "./Pages/Orders/PaidOrder/PaidOrderNoShipper";
+
 import PaidOrder from "./Pages/Orders/PaidOrder/PaidOrder";
 import SuccessOrder from "./Pages/Orders/SuccessOrder";
 import CanceledOrder from "./Pages/Orders/CanceledOrder";
@@ -44,10 +44,7 @@ function App() {
           ></Route>
           <Route path="/admin/success_order" element={<SuccessOrder />}></Route>
           <Route path="/admin/paid_order" element={<PaidOrder />}></Route>
-          <Route
-            path="/admin/paid_order_noshipper"
-            element={<PaidOrderNoShipper />}
-          ></Route>
+
           <Route path="/admin/deposit" element={<Deposit />}></Route>
           <Route path="/admin/transaction" element={<Transaction />}></Route>
           <Route path="/admin/wallet" element={<Wallet />}></Route>
