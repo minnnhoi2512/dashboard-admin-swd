@@ -141,11 +141,11 @@ function PaidOrder() {
         {loadingShipper ? (
           <p>Loading shippers...</p>
         ) : (
-          <ul>
+          <select>
             {shippers.map((shipper) => (
-              <li key={shipper.id}>{shipper.name}</li>
+              <option key={shipper.id}>{shipper.Name}</option>
             ))}
-          </ul>
+          </select>
         )}
       </Modal>
     </Space>
