@@ -1,7 +1,9 @@
 import { Avatar, Rate, Space, Table, Typography } from "antd";
 import { useEffect, useState } from "react";
-import { getPaidOrders, getShippers } from "../../API";
+import { getPaidOrders, getShippers } from "../../../API";
 import moment from "moment";
+import { Link } from "react-router-dom";
+
 function PaidOrder() {
   const [loading, setLoading] = useState(false);
   // const [loadingShipper, setLoadingShipper] = useState(false);
@@ -23,8 +25,23 @@ function PaidOrder() {
   };
   /// note : cái dataIndex : để fetch data , nên
   return (
-    <Space size={20} direction="vertical" className="items-center  ">
-      <Typography.Title level={4}>PaidOrder</Typography.Title>
+    <Space size={20} direction="vertical" className="  ">
+      <Typography.Title level={4} className="text-center mt-8">
+        PaidOrder
+      </Typography.Title>
+      <div>
+        <Link to="/paid_order">
+          <button className="rounded-md bg-blue-400 w-[100px] h-[30px]">
+            HaveShipper
+          </button>
+        </Link>
+        <Link to="/paid_order_noshipper">
+          <button className="rounded-md ml-5 bg-blue-400 w-[100px]  h-[30px]">
+            NoShipper
+          </button>
+        </Link>
+      </div>
+
       <div className="flex justify-center ">
         <Table
           style={{ width: 1200 }}
@@ -65,14 +82,21 @@ function PaidOrder() {
               dataIndex: "BuildingName",
             },
             {
-              title: "Shipper",
+              title: "ShipperName",
               dataIndex: "ShipperId",
               render: (ShipperId) => {
                 let text = "";
+                let textColorClass = "";
+
                 if (ShipperId === null) {
                   text = "NOT YET";
+                  textColorClass = "text-red-500"; // Chữ màu đỏ
+                } else {
+                  text = ShipperId;
+                  textColorClass = "text-green-500"; // Chữ màu xanh
                 }
-                return <span>{text}</span>;
+
+                return <span className={textColorClass}>{text}</span>;
               },
             },
             {

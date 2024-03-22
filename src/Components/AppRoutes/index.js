@@ -8,11 +8,12 @@ import Brand from "../../Pages/Product/Brand";
 import StoreDetail from "../../Pages/Product/Store/StoreDetail";
 import Product from "../../Pages/Product/Product";
 import PendingOrder from "../../Pages/Orders/PendingOrder";
-import PaidOrder from "../../Pages/Orders/PaidOrder";
+import PaidOrder from "../../Pages/Orders/PaidOrder/PaidOrder";
 import CanceledOrder from "../../Pages/Orders/CanceledOrder";
 import Deposit from "../../Pages/Money/Deposit";
 import Transaction from "../../Pages/Money/Transaction";
 import Wallet from "../../Pages/Money/Wallet";
+import PaidOrderNoShipper from "../../Pages/Orders/PaidOrder/PaidOrderNoShipper";
 
 function AppRoutes() {
   return (
@@ -27,6 +28,10 @@ function AppRoutes() {
       <Route path="/pending_order" element={<PendingOrder />}></Route>
       <Route path="/canceled_order" element={<CanceledOrder />}></Route>
       <Route path="/paid_order" element={<PaidOrder />}></Route>
+      <Route
+        path="/paid_order_noshipper"
+        element={<PaidOrderNoShipper />}
+      ></Route>
       <Route path="/deposit" element={<Deposit />}></Route>
       <Route path="/transaction" element={<Transaction />}></Route>
       <Route path="/wallet" element={<Wallet />}></Route>
