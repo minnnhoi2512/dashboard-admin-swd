@@ -1,6 +1,6 @@
 import { Avatar, Rate, Space, Table, Typography } from "antd";
 import { useEffect, useState } from "react";
-import { getCustomers, getInventory } from "../../API";
+import { getDeposit } from "../../API";
 
 function Deposit() {
   const [loading, setLoading] = useState(false);
@@ -8,8 +8,8 @@ function Deposit() {
 
   useEffect(() => {
     setLoading(true);
-    getCustomers().then((res) => {
-      setDataSource(res.users);
+    getDeposit().then((res) => {
+      setDataSource(res.data);
       setLoading(false);
     });
   }, []);
@@ -23,29 +23,43 @@ function Deposit() {
           loading={loading}
           columns={[
             {
-              title: "No",
+              title: "ID",
               dataIndex: "DepositId",
             },
             {
-              title: "Amount",
+              title: "Tổng",
               dataIndex: "Amount",
             },
             {
-              title: "Method",
+              title: "Phương thức",
               dataIndex: "Method",
             },
 
             {
-              title: "Status",
+              title: "Trạng thái",
               dataIndex: "Status",
+              render: (Status) => {
+                let text = "";
+                let textColorClass = "";
+
+                if (Status != 1) {
+                  text = "Thất bại";
+                  textColorClass = "text-red-500"; // Chữ màu đỏ
+                } else {
+                  text = "Thành công";
+                  textColorClass = "text-green-500"; // Chữ màu xanh
+                }
+
+                return <span className={textColorClass}>{text}</span>;
+              },
             },
             {
-              title: "Date",
+              title: "Ngày",
               dataIndex: "Date",
             },
             {
-              title: "Wallet",
-              dataIndex: "Wallet",
+              title: "khách hàng",
+              dataIndex: "Name_Customer",
             },
           ]}
           dataSource={dataSource}

@@ -1,35 +1,46 @@
-import { Avatar, Rate, Space, Table, Typography } from "antd";
+import { Avatar, Rate, Space, Table, Typography, Modal } from "antd";
 import { useEffect, useState } from "react";
 import { getPaidOrders, getShippers } from "../../../API";
 import moment from "moment";
-import { Link } from "react-router-dom";
 
 function PaidOrder() {
   const [loading, setLoading] = useState(false);
-  // const [loadingShipper, setLoadingShipper] = useState(false);
-  // const [dataSource, setDataSource] = useState([]);
+  const [loadingShipper, setLoadingShipper] = useState(false);
+  const [dataSource, setDataSource] = useState([]);
+  const [shippers, setShippers] = useState([]);
+  const [modalVisible, setModalVisible] = useState(false);
+  const [selectedOrderId, setSelectedOrderId] = useState(null);
   // const [shippers, setListShipper] = useState([]);
-  // useEffect(() => {
-  //   setLoading(true);
-  //   getPaidOrders().then((res) => {
-  //     setDataSource(res);
-  //     setLoading(false);
-  //   });
-  //   getShippers().then((res) => {
-  //     setDataSource(res);
-  //     setLoadingShipper(false);
-  //   });
-  // }, []);
+  useEffect(() => {
+    setLoading(true);
+    getPaidOrders().then((res) => {
+      setDataSource(res);
+      setLoading(false);
+    });
+  }, []);
+  // const handleChooseShipper = (CustomerOrderId) => {
+  //   console.log(CustomerOrderId);
+  // };
   const handleChooseShipper = (CustomerOrderId) => {
-    console.log(CustomerOrderId);
+    setSelectedOrderId(CustomerOrderId);
+    loadShippers();
+    setModalVisible(true);
   };
+  const loadShippers = () => {
+    setLoadingShipper(true);
+    getShippers().then((res) => {
+      setShippers(res);
+      setLoadingShipper(false);
+    });
+  };
+
   /// note : cái dataIndex : để fetch data , nên
   return (
     <Space size={20} direction="vertical" className="  ">
       <Typography.Title level={4} className="text-center mt-8">
         PaidOrder
       </Typography.Title>
-      <div>
+      {/* <div>
         <Link to="/paid_order">
           <button className="rounded-md bg-blue-400 w-[100px] h-[30px]">
             HaveShipper
@@ -40,7 +51,7 @@ function PaidOrder() {
             NoShipper
           </button>
         </Link>
-      </div>
+      </div> */}
 
       <div className="flex justify-center ">
         <Table
@@ -52,19 +63,19 @@ function PaidOrder() {
               dataIndex: "CustomerOrderId",
             },
             {
-              title: "Customer",
+              title: "Khách hàng",
               dataIndex: "Customer_Name",
             },
             {
-              title: "Product Price",
+              title: "Tiền sản phẩm",
               dataIndex: "Total",
             },
             {
-              title: "ShippingPrice",
+              title: "Tiền vận chuyển",
               dataIndex: "ShippingPrice",
             },
             {
-              title: "Date",
+              title: "Ngày",
               dataIndex: "OrderDate",
               render: (OrderDate) => {
                 const formattedDate = moment(OrderDate).format(
@@ -74,15 +85,15 @@ function PaidOrder() {
               },
             },
             {
-              title: "Status",
+              title: "Trạng thái",
               dataIndex: "Status",
             },
             {
-              title: "To",
+              title: "Mã tòa",
               dataIndex: "BuildingName",
             },
             {
-              title: "ShipperName",
+              title: "ID-Shipper",
               dataIndex: "ShipperId",
               render: (ShipperId) => {
                 let text = "";
@@ -108,19 +119,35 @@ function PaidOrder() {
                     <button
                       onClick={() => handleChooseShipper(CustomerOrderId)}
                     >
-                      Choose Shipper
+                      chọn Shipper
                     </button>
                   </span>
                 );
               },
             },
           ]}
-          // dataSource={dataSource}
+          dataSource={dataSource}
           pagination={{
             pageSize: 5,
           }}
         ></Table>
       </div>
+      <Modal
+        title="Chọn Shipper"
+        visible={modalVisible}
+        onCancel={() => setModalVisible(false)}
+        footer={null}
+      >
+        {loadingShipper ? (
+          <p>Loading shippers...</p>
+        ) : (
+          <ul>
+            {shippers.map((shipper) => (
+              <li key={shipper.id}>{shipper.name}</li>
+            ))}
+          </ul>
+        )}
+      </Modal>
     </Space>
   );
 }

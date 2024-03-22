@@ -25,70 +25,61 @@ function getItem(label, key, icon, children, type, path) {
 
 const items = [
   getItem(
-    "Dashboard",
+    "Bảng số liệu",
     "dashboard",
     <PieChartOutlined />,
     null,
     "link",
     "/dashboard"
   ),
-  getItem("Account Manager", "accountManagement", <ContainerOutlined />, [
-    getItem("Account", "account", null, null, "link", "/accounts"),
+  getItem("Quản lý tài khoản", "accountManagement", <ContainerOutlined />, [
+    getItem("Tài Khoản", "account", null, null, "link", "/accounts"),
   ]),
-  getItem("Location", "location", <DesktopOutlined />, [
-    getItem("Area", "area", null, null, "link", "/area"),
+  getItem("Vị trí", "location", <DesktopOutlined />, [
+    getItem("Khu vực", "area", null, null, "link", "/area"),
   ]),
-  getItem("Product", "product", <AppstoreOutlined />, [
-    getItem("Brand", "brand", null, null, "link", "/brand"),
+  getItem("Sản phẩm", "product", <AppstoreOutlined />, [
+    getItem("Nhãn hàng", "brand", null, null, "link", "/brand"),
+    getItem("Cửa hàng", "store", null, null, "link", "/store_detail"),
+    getItem("Sản phẩm", "product", null, null, "link", "/product"),
+  ]),
+  getItem("Đơn hàng", "order", <MailOutlined />, [
     getItem(
-      "Store",
-      "store",
-      null,
-      [
-        getItem(
-          "StoreDetail",
-          "storeDetail",
-          null,
-          null,
-          "link",
-          "/store_detail"
-        ),
-        getItem(
-          "Product in Store",
-          "productInStore",
-          null,
-          null,
-          "link",
-          "/wallet"
-        ),
-      ],
-      "subMenu"
-    ),
-    getItem("Product", "product", null, null, "link", "/product"),
-  ]),
-  getItem("Order", "order", <MailOutlined />, [
-    getItem(
-      "Pending Order",
+      "Đơn hàng chờ",
       "pendingOrder",
       null,
       null,
       "link",
       "/pending_order"
     ),
-    getItem("Paid Order", "paidOrder", null, null, "link", "/paid_order"),
     getItem(
-      "Canceled Order",
+      "Đơn hàng đã thanh toán",
+      "paidOrder",
+      null,
+      null,
+      "link",
+      "/paid_order"
+    ),
+    getItem(
+      "Đơn hàng bị hủy",
       "canceledOrder",
       null,
       null,
       "link",
       "/canceled_order"
     ),
+    getItem(
+      "Đơn hàng thành công",
+      "successOrder",
+      null,
+      null,
+      "link",
+      "/success_order"
+    ),
   ]),
-  getItem("Money", "money", <PieChartOutlined />, [
-    getItem("Deposit", "deposit", null, null, "link", "/deposit"),
-    getItem("Transaction", "transaction", null, null, "link", "/transaction"),
-    getItem("Wallet", "wallet", null, null, "link", "/wallet"),
+  getItem("Tiền", "money", <PieChartOutlined />, [
+    getItem("Tiền gửi", "deposit", null, null, "link", "/deposit"),
+    getItem("Giao dịch", "transaction", null, null, "link", "/transaction"),
   ]),
 ];
 

@@ -14,6 +14,7 @@ import Deposit from "../../Pages/Money/Deposit";
 import Transaction from "../../Pages/Money/Transaction";
 import Wallet from "../../Pages/Money/Wallet";
 import PaidOrderNoShipper from "../../Pages/Orders/PaidOrder/PaidOrderNoShipper";
+import SuccessOrder from "../../Pages/Orders/SuccessOrder";
 
 function AppRoutes() {
   return (
@@ -27,6 +28,7 @@ function AppRoutes() {
       <Route path="/product" element={<Product />}></Route>
       <Route path="/pending_order" element={<PendingOrder />}></Route>
       <Route path="/canceled_order" element={<CanceledOrder />}></Route>
+      <Route path="/success_order" element={<SuccessOrder />}></Route>
       <Route path="/paid_order" element={<PaidOrder />}></Route>
       <Route
         path="/paid_order_noshipper"

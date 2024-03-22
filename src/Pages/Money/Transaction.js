@@ -1,15 +1,15 @@
 import { Avatar, Rate, Space, Table, Typography } from "antd";
 import { useEffect, useState } from "react";
-import { getCustomers, getInventory } from "../../API";
-
+import { getTransaction } from "../../API";
+import moment from "moment";
 function Transaction() {
   const [loading, setLoading] = useState(false);
   const [dataSource, setDataSource] = useState([]);
 
   useEffect(() => {
     setLoading(true);
-    getCustomers().then((res) => {
-      setDataSource(res.users);
+    getTransaction().then((res) => {
+      setDataSource(res.data);
       setLoading(false);
     });
   }, []);
@@ -23,29 +23,45 @@ function Transaction() {
           loading={loading}
           columns={[
             {
-              title: "No",
+              title: "ID",
               dataIndex: "TransactionId",
             },
             {
-              title: "CustomerOrderid",
-              dataIndex: "CustomerOrderid",
-            },
-            {
-              title: "Amount",
+              title: "Tổng",
               dataIndex: "Amount",
             },
 
             {
-              title: "Status",
+              title: "Trạng thái",
               dataIndex: "Status",
+              render: (Status) => {
+                let text = "";
+                let textColorClass = "";
+
+                if (Status != "T") {
+                  text = "Trừ tiền";
+                  textColorClass = "text-red-500"; // Chữ màu đỏ
+                } else {
+                  text = "Cộng tiền";
+                  textColorClass = "text-green-500"; // Chữ màu xanh
+                }
+
+                return <span className={textColorClass}>{text}</span>;
+              },
             },
             {
-              title: "Date",
+              title: "Ngày",
               dataIndex: "Date",
+              render: (Date) => {
+                const formattedDate = moment(Date).format(
+                  "YYYY-MM-DD HH:mm:ss"
+                );
+                return <span>{Date}</span>;
+              },
             },
             {
-              title: "Wallet",
-              dataIndex: "Wallet",
+              title: "Ví tiền",
+              dataIndex: "Name_Customer",
             },
           ]}
           dataSource={dataSource}
