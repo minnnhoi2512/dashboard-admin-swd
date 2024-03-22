@@ -22,7 +22,7 @@ function AppRoutes() {
       <Route path="/dashboard" element={<Dashboard />}></Route>
       <Route path="/area" element={<Area />}></Route>
 
-      <Route path="/accounts" element={<AccountManager />}></Route>
+      <Route path="/admin/accounts" element={<AccountManager />}></Route>
       <Route path="/brand" element={<Brand />}></Route>
       <Route path="/store_detail" element={<StoreDetail />}></Route>
       <Route path="/product" element={<Product />}></Route>

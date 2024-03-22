@@ -27,7 +27,7 @@ export default function Login() {
       console.log(data);
       if (data.token) {
         localStorage.setItem("account", data.account.recordsets[0]);
-        navigate("/dashboard");
+        navigate("/admin");
       } else {
         setError("Invalid username or password");
       }
@@ -78,7 +78,6 @@ export default function Login() {
             onChange={(e) => setPassword(e.target.value)}
             required
           />
-
         </div>
         <div className="flex items-center justify-between mb-4">
           <div className="flex items-center">
@@ -95,7 +94,6 @@ export default function Login() {
               Ghi nhớ
             </label>
           </div>
-
         </div>
 
         <button

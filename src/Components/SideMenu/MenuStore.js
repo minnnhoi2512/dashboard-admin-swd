@@ -30,67 +30,42 @@ const items = [
     <PieChartOutlined />,
     null,
     "link",
-    "/admin/dashboard"
+    "/store/dashboard_store"
   ),
-  getItem("Quản lý tài khoản", "accountManagement", <ContainerOutlined />, [
-    getItem("Tài Khoản", "account", null, null, "link", "/admin/accounts"),
-  ]),
-  getItem("Vị trí", "location", <DesktopOutlined />, [
-    getItem("Khu vực", "area", null, null, "link", "/admin/area"),
-  ]),
-  getItem("Sản phẩm", "product", <AppstoreOutlined />, [
-    getItem("Nhãn hàng", "brand", null, null, "link", "/admin/brand"),
-    getItem("Cửa hàng", "store", null, null, "link", "/admin/store_detail"),
-    getItem("Sản phẩm", "product", null, null, "link", "/admin/product"),
-  ]),
-  getItem("Đơn hàng", "order", <MailOutlined />, [
+
+  getItem("Sản phẩm", "productInStore", <AppstoreOutlined />, [
     getItem(
-      "Đơn hàng chờ",
-      "pendingOrder",
+      "Sản phẩm trong cửa hàng",
+      "product",
       null,
       null,
       "link",
-      "/admin/pending_order"
+      "/store/product_in_store"
     ),
+  ]),
+  getItem("Đơn hàng của khách", "OrderOfCustomer", <MailOutlined />, [
     getItem(
-      "Đơn hàng đã thanh toán",
-      "paidOrder",
+      "Đơn hàng",
+      "OrderOfCustomer",
       null,
       null,
       "link",
-      "/admin/paid_order"
-    ),
-    getItem(
-      "Đơn hàng bị hủy",
-      "canceledOrder",
-      null,
-      null,
-      "link",
-      "/admin/canceled_order"
-    ),
-    getItem(
-      "Đơn hàng thành công",
-      "successOrder",
-      null,
-      null,
-      "link",
-      "/admin/success_order"
+      "/store/order_customer"
     ),
   ]),
   getItem("Tiền", "money", <PieChartOutlined />, [
-    getItem("Tiền gửi", "deposit", null, null, "link", "/admin/deposit"),
     getItem(
       "Giao dịch",
       "transaction",
       null,
       null,
       "link",
-      "/admin/transaction"
+      "/store/store_transaction"
     ),
   ]),
 ];
 
-const SideMenu = () => {
+const MenuStore = () => {
   const [collapsed, setCollapsed] = useState(false);
   const [isDropdownOpen, setIsDropdownOpen] = useState({
     accountManagement: false,
@@ -159,4 +134,4 @@ const SideMenu = () => {
   );
 };
 
-export default SideMenu;
+export default MenuStore;

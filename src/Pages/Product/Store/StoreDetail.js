@@ -16,7 +16,7 @@ function StoreDetail() {
   /// note : cái dataIndex : để fetch data , cái này dung api của ProductInStorebyID
   return (
     <Space size={20} direction="vertical" className="items-center  ">
-      <Typography.Title level={4}>Store</Typography.Title>
+      <Typography.Title level={4}>Cửa hàng</Typography.Title>
       <div className="flex justify-center ">
         <Table
           style={{ width: 1200 }}
@@ -27,47 +27,47 @@ function StoreDetail() {
               dataIndex: "ProductInStoreId",
             },
             {
-              title: "StoreName",
+              title: "Tên store",
               dataIndex: "StoreName",
             },
             {
-              title: "Address",
+              title: "Địa chỉ",
               dataIndex: "Address",
             },
 
             {
-              title: "NameProduct",
+              title: "Tên sản phẩm",
               dataIndex: "Name",
             },
             {
-              title: "Image",
+              title: "Ảnh",
               dataIndex: "Image",
               render: (Image) => {
                 return <Avatar src={Image} />;
               },
             },
             {
-              title: "Origin",
+              title: "Nguồn gốc",
               dataIndex: "Origin",
             },
             {
-              title: "MfgDate",
+              title: "Ngày sản xuất ",
               dataIndex: "MfgDate",
             },
             {
-              title: "ExpDate",
+              title: "Hạn sử dụng",
               dataIndex: "ExpDate",
             },
             {
-              title: "CategoryName",
+              title: "Mục sản phẩm",
               dataIndex: " CategoryName",
             },
             {
-              title: "Quantity",
+              title: "Số lượng",
               dataIndex: " Quantity",
             },
             {
-              title: "Status",
+              title: "Trạng thái",
               dataIndex: " Status",
             },
           ]}
