@@ -40,6 +40,13 @@ function Brand() {
             {
               title: "Trạng thái",
               dataIndex: "Status",
+              render: (status) => {
+                if (status === "A") {
+                  return <span style={{ color: "green" }}>Hoạt động</span>;
+                } else {
+                  return <span>{status}</span>;
+                }
+              },
             },
           ]}
           dataSource={dataSource}

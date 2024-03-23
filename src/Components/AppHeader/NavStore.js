@@ -8,7 +8,7 @@ function NavStore() {
       <Image
         width={50}
         height={50}
-        src="https://png.pngtree.com/png-clipart/20230409/original/pngtree-admin-and-customer-service-job-vacancies-png-image_9041264.png"
+        src="https://th.bing.com/th/id/OIF.F354qienQQDCRiqcCHcXfA?rs=1&pid=ImgDetMain"
         alt="logo"
         className="rounded-full bg-neutral-500"
       />

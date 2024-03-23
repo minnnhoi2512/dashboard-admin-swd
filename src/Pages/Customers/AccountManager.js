@@ -147,9 +147,8 @@ function AccountManager() {
               title: "Ngày tạo",
               dataIndex: "createAt",
               render: (createAt) => {
-                const formattedDate = moment(createAt).format(
-                  "YYYY-MM-DD HH:mm:ss"
-                );
+                const formattedDate = moment.utc(createAt).format('YYYY-MM-DD HH:mm:ss');
+                
                 return <span>{formattedDate}</span>;
               },
             },
