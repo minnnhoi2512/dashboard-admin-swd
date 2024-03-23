@@ -11,13 +11,14 @@ import {
   DatePicker,
 } from "antd";
 import { useEffect, useState } from "react";
-import { getStore } from "../../../API";
-
+import { getStore, getListProductInStore } from "../../../API";
+import moment from "moment";
 function ProductInStore() {
   const [loading, setLoading] = useState(false);
   const [dataSource, setDataSource] = useState([]);
   const [isModalVisible, setIsModalVisible] = useState(false);
 
+  // console.log(storeId);
   const showModal = () => {
     setIsModalVisible(true);
   };
@@ -56,9 +57,15 @@ function ProductInStore() {
   const [form] = Form.useForm();
 
   useEffect(() => {
+    const storeId = localStorage.getItem("storeId");
     setLoading(true);
-    getStore().then((res) => {
-      setDataSource(res.data);
+    getListProductInStore(storeId).then((res) => {
+      // console.log(res.status)
+      if (res.status === 200) {
+        setDataSource(res.data);
+      } else {
+        setDataSource(null);
+      }
       setLoading(false);
     });
   }, []);
@@ -66,7 +73,7 @@ function ProductInStore() {
   return (
     <Space size={20} direction="vertical">
       <Typography.Title level={4} className=" text-center  ">
-        Cửa hàng
+        Sản phẩm của cửa hàng
       </Typography.Title>
       <div className="ml-10">
         <Button type="primary" onClick={showModal} className="bg-blue-700">
@@ -140,58 +147,64 @@ function ProductInStore() {
               dataIndex: "ProductInStoreId",
             },
             {
-              title: "Tên sản phẩm",
-              dataIndex: "Name",
+              title: "StoreName",
+              dataIndex: "StoreName",
             },
             {
               title: "Địa chỉ",
               dataIndex: "Address",
             },
-
             {
-              title: "Ảnh sản phẩm",
+              title: "Sản phẩm",
+              dataIndex: "Name",
+            },
+            {
+              title: "Hình ảnh",
               dataIndex: "Image",
               render: (Image) => {
                 return <Avatar src={Image} />;
               },
             },
             {
-              title: "Nguồn gốc",
+              title: "Xuất xứ",
               dataIndex: "Origin",
             },
             {
-              title: "Ngày sản xuất ",
+              title: "Ngày sản xuất",
               dataIndex: "MfgDate",
+              render: (MfgDate) => {
+                const formattedDate = moment(MfgDate).format("YYYY-MM-DD");
+                return <span>{formattedDate}</span>;
+              },
             },
             {
-              title: "Hạn sử dụng",
+              title: "Ngày hết hạn",
               dataIndex: "ExpDate",
+              render: (ExpDate) => {
+                const formattedDate = moment(ExpDate).format("YYYY-MM-DD");
+                return <span>{formattedDate}</span>;
+              },
             },
             {
-              title: "Mục sản phẩm",
-              dataIndex: " CategoryName",
+              title: "Phân loại",
+              dataIndex: "CategoryName",
             },
             {
-              title: "Số lượng",
-              dataIndex: " Quantity",
+              title: "Tồn kho",
+              dataIndex: "Remaining",
             },
             {
               title: "Trạng thái",
-              dataIndex: " Status",
-            },
-            {
-              title: "Action",
-              dataIndex: "Action",
-              render: (_, record) => (
-                <Popconfirm
-                  title="Bạn có chắc chắn muốn xóa?"
-                  // onConfirm={() => handleDelete(record)} ty Hoi dung cái nay goi hàm HandleDelete
-                  okText="Xóa"
-                  cancelText="Hủy"
-                >
-                  <a>Xóa</a>
-                </Popconfirm>
-              ),
+              dataIndex: "Status",
+              render: (status) => {
+                if (status === 1) {
+                  return <span style={{ color: "green" }}>Còn bán</span>;
+                } else if (status === 0) {
+                  return <span style={{ color: "red" }}>Ngưng bán</span>;
+                } else {
+                  return null;
+                }
+              },
             },
           ]}
           dataSource={dataSource}

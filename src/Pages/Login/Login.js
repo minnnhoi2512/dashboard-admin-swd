@@ -24,10 +24,19 @@ export default function Login() {
 
     try {
       const data = await loginAccount(username, password);
-      console.log(data);
+      // console.log(data.account.recordsets[0][0]);
       if (data.token) {
-        localStorage.setItem("account", data.account.recordsets[0]);
-        navigate("/admin");
+        if (data.account.recordsets[0][0].role === 1) {
+          localStorage.setItem("role", data.account.recordsets[0][0].role);
+          localStorage.setItem(
+            "storeId",
+            data.account.recordsets[0][0].StoreId
+          );
+          navigate("/store");
+        } else if (data.account.recordsets[0][0].role === 3) {
+          localStorage.setItem("role", data.account.recordsets[0][0].role);
+          navigate("/admin");
+        }
       } else {
         setError("Invalid username or password");
       }
@@ -37,7 +46,14 @@ export default function Login() {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center w-full dark:bg-gray-950">
+    <div
+      className="min-h-screen flex items-center justify-center w-full dark:bg-gray-950"
+      style={{
+        backgroundImage: "url(https://wallpaperaccess.com/full/226485.jpg)",
+        backgroundSize: "cover",
+        backgroundPosition: "center",
+      }}
+    >
       <div className="bg-white dark:bg-gray-900 shadow-md rounded-lg px-8 py-6 max-w-md">
         <h1 className="text-2xl font-bold text-center mb-4 dark:text-gray-200">
           Thông tin tài khoản đăng nhập

@@ -1,6 +1,6 @@
 import { Avatar, Rate, Space, Table, Typography, Modal } from "antd";
 import { useEffect, useState } from "react";
-import { getPaidOrders, getShippers } from "../../../API";
+import { getPaidOrders, getShippers, chooseShipper } from "../../../API";
 import moment from "moment";
 
 function PaidOrder() {
@@ -10,6 +10,7 @@ function PaidOrder() {
   const [shippers, setShippers] = useState([]);
   const [modalVisible, setModalVisible] = useState(false);
   const [selectedOrderId, setSelectedOrderId] = useState(null);
+  const [selectedShipper, setSelectedShipper] = useState(null);
   // const [shippers, setListShipper] = useState([]);
   useEffect(() => {
     setLoading(true);
@@ -18,21 +19,71 @@ function PaidOrder() {
       setLoading(false);
     });
   }, []);
+  useEffect(() => {
+    loadShippers();
+  }, []);
+  console.log(shippers);
   // const handleChooseShipper = (CustomerOrderId) => {
-  //   console.log(CustomerOrderId);
+  // console.log(CustomerOrderId);
   // };
   const handleChooseShipper = (CustomerOrderId) => {
     setSelectedOrderId(CustomerOrderId);
     loadShippers();
     setModalVisible(true);
   };
+
+  // const loadShippers = () => {
+  //   setLoadingShipper(true);
+  //   // getShippers().then((res) => {
+  //   //   setShippers(res.data);
+  //   //   setLoadingShipper(false);
+  //   // });
+  // };
+
   const loadShippers = () => {
     setLoadingShipper(true);
-    getShippers().then((res) => {
-      setShippers(res.data);
-      setLoadingShipper(false);
-    });
+    getShippers()
+      .then((res) => {
+        setShippers(res.data);
+        setLoadingShipper(false);
+      })
+      .catch((error) => {
+        console.error("Error loading shippers:", error);
+        setLoadingShipper(false);
+      });
   };
+
+  const handleSelectShipper = (shipperId) => {
+    setSelectedShipper(shipperId);
+    setModalVisible(false);
+    if (selectedOrderId && shipperId) {
+      chooseShipper(selectedOrderId, shipperId)
+        .then((response) => {
+          if (response.ok) {
+            console.log("Shipper chosen successfully.");
+            // Update the dataSource with the selected shipper's name
+            const updatedDataSource = dataSource.map((item) => {
+              if (item.CustomerOrderId === selectedOrderId) {
+                return {
+                  ...item,
+                  ShipperId: shipperId,
+                };
+              }
+              return item;
+            });
+            setDataSource(updatedDataSource);
+          } else {
+            console.error("Failed to choose shipper:", response.statusText);
+          }
+        })
+        .catch((error) => {
+          console.error("Error choosing shipper:", error);
+        });
+    } else {
+      console.error("Selected order ID or shipper ID is missing.");
+    }
+  };
+  console.log("Selected: ", selectedShipper);
 
   /// note : cái dataIndex : để fetch data , nên
   return (
@@ -113,13 +164,22 @@ function PaidOrder() {
             {
               title: "Action",
               dataIndex: "CustomerOrderId",
-              render: (CustomerOrderId) => {
+              render: (CustomerOrderId, record) => {
+                const { ShipperId } = record;
+                if (ShipperId !== null) {
+                  const shipper = shippers.find(
+                    (shipper) => shipper.ShipperId === ShipperId
+                  );
+                  if (shipper) {
+                    return <span>{shipper.Name}</span>;
+                  }
+                }
                 return (
                   <span>
                     <button
                       onClick={() => handleChooseShipper(CustomerOrderId)}
                     >
-                      chọn Shipper
+                      Chọn Shipper
                     </button>
                   </span>
                 );
@@ -138,7 +198,8 @@ function PaidOrder() {
         onCancel={() => setModalVisible(false)}
         footer={null}
       >
-        {loadingShipper ? (
+        <div className="max-h-40 overflow-y-auto">
+          {/* {loadingShipper ? (
           <p>Loading shippers...</p>
         ) : (
           <select>
@@ -146,7 +207,21 @@ function PaidOrder() {
               <li key={shipper.id}>{shipper.Name}</li>
             ))}
           </select>
-        )}
+        )} */}
+          {Array.isArray(shippers) && shippers.length > 0 ? (
+            shippers.map((shipper, index) => (
+              <div
+                key={index}
+                class="block py-2 px-4 text-gray-800 cursor-pointer hover:bg-gray-200"
+                onClick={() => handleSelectShipper(shipper.ShipperId)}
+              >
+                {shipper.Name}
+              </div>
+            ))
+          ) : (
+            <div>No syllabus data available.</div>
+          )}
+        </div>
       </Modal>
     </Space>
   );
