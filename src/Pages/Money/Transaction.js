@@ -53,9 +53,8 @@ function Transaction() {
               title: "Ngày",
               dataIndex: "Date",
               render: (Date) => {
-                const formattedDate = moment(Date).format(
-                  "YYYY-MM-DD HH:mm:ss"
-                );
+                const formattedDate = moment.utc(Date).format('YYYY-MM-DD HH:mm:ss');
+                
                 return <span>{formattedDate}</span>;
               },
             },

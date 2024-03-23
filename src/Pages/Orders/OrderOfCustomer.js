@@ -65,9 +65,8 @@ function OrderOfCustomer() {
               title: "Ngày",
               dataIndex: "OrderDate",
               render: (OrderDate) => {
-                const formattedDate = moment(OrderDate).format(
-                  "YYYY-MM-DD HH:mm:ss"
-                );
+                const formattedDate = moment.utc(OrderDate).format('YYYY-MM-DD HH:mm:ss');
+                
                 return <span>{formattedDate}</span>;
               },
             },

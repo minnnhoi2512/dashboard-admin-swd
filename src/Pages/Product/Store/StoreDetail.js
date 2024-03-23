@@ -1,19 +1,29 @@
 import { Avatar, Space, Table, Typography } from "antd";
 import { useEffect, useState } from "react";
 import { getListProductInStore } from "../../../API";
-import { useParams } from "react-router-dom";
+import { useLocation,useParams } from "react-router-dom";
 import moment from "moment";
 function StoreDetail() {
   const [loading, setLoading] = useState(false);
   const [dataSource, setDataSource] = useState([]);
   const { id } = useParams(); // Retrieve the URL parameter
-  const [storeName, setStoreName] = useState("");
+  const location = useLocation();
+  const searchParams = new URLSearchParams(location.search);
+  const storeName = searchParams.get('store');
+  // const [storeName, setStoreName] = useState("");
+  console.log(id)
+  console.log(storeName)
   useEffect(() => {
     setLoading(true);
     getListProductInStore(id).then((res) => {
-      // Pass the id parameter to the API call
-      setDataSource(res.data);
-      setStoreName(res.data[0].StoreName);
+      if (res.status === 200) {
+        // setStoreName(res.data[0].StoreName);
+        setDataSource(res.data);
+      } else {
+        // setStoreName("Trống");
+        setDataSource(null)
+      }
+
       setLoading(false);
     });
   }, [id]); // Add id to the dependency array to trigger the effect when id changes

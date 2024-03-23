@@ -1,7 +1,7 @@
 import { Avatar, Rate, Space, Table, Typography } from "antd";
 import { useEffect, useState } from "react";
 import { getDeposit } from "../../API";
-import moment from "moment";
+import moment from 'moment';
 function Deposit() {
   const [loading, setLoading] = useState(false);
   const [dataSource, setDataSource] = useState([]);
@@ -9,6 +9,7 @@ function Deposit() {
   useEffect(() => {
     setLoading(true);
     getDeposit().then((res) => {
+      console.log(res.data);
       setDataSource(res.data);
       setLoading(false);
     });
@@ -57,12 +58,10 @@ function Deposit() {
               title: "Ngày",
               dataIndex: "Date",
               render: (Date) => {
-                const formattedDate = moment(Date).format(
-                  "YYYY-MM-DD HH:mm:ss"
-                );
+                const formattedDate = moment.utc(Date).format('YYYY-MM-DD HH:mm:ss');
+                
                 return <span>{formattedDate}</span>;
               },
-              
             },
             {
               title: "Khách hàng",

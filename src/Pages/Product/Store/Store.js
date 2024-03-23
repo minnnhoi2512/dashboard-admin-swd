@@ -30,7 +30,7 @@ function Store() {
 
   const handleRowClick = (record) => {
     // Navigate to store detail page with record.StoreId
-    navigate(`/admin/store/${record.StoreId}`);
+    navigate(`/admin/store/${record.StoreId}?store=${record.StoreName}`);
   };
 
   return (

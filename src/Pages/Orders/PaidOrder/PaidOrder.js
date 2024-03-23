@@ -38,7 +38,7 @@ function PaidOrder() {
   return (
     <Space size={20} direction="vertical" className="  ">
       <Typography.Title level={4} className="text-center mt-8">
-        PaidOrder
+        Đã thanh toán
       </Typography.Title>
       {/* <div>
         <Link to="/paid_order">
@@ -78,9 +78,8 @@ function PaidOrder() {
               title: "Ngày",
               dataIndex: "OrderDate",
               render: (OrderDate) => {
-                const formattedDate = moment(OrderDate).format(
-                  "YYYY-MM-DD HH:mm:ss"
-                );
+                const formattedDate = moment.utc(OrderDate).format('YYYY-MM-DD HH:mm:ss');
+                
                 return <span>{formattedDate}</span>;
               },
             },
